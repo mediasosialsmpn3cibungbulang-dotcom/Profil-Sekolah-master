@@ -1,0 +1,186 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  imageUrl  String?
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Teacher {
+  id             String   @id @default(uuid())
+  name           String
+  subject        String
+  photoUrl       String?
+  description    String?
+  education      String?
+  experience     String?
+  additionalRole String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Setting {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Achievement {
+  id          String   @id @default(uuid())
+  title       String
+  category    String
+  studentName String
+  level       String
+  imageUrl    String?
+  description String?
+  date        DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Slider {
+  id        String   @id @default(uuid())
+  imageUrl  String
+  caption   String?
+  isActive  Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Sambutan {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  photoUrl  String?
+  updatedAt DateTime @updatedAt
+}
+
+model Sejarah {
+  id        String   @id @default(uuid())
+  title     String   @default("Sejarah Sekolah")
+  content   String
+  photoUrl  String?
+  updatedAt DateTime @updatedAt
+}
+
+model Profil {
+  id              String   @id @default(uuid())
+  title           String   @default("Profil Sekolah")
+  schoolName      String   @default("SMP NEGERI 3 CIBUNGBULANG")
+  status          String   @default("TERAKREDITASI A (UNGGUL)")
+  tahunBerdiri    String   @default("2005")
+  branding        String   @default("SEKOLAH RAMAH ANAK")
+  waktuBelajar    String   @default("5 HARI (SENIN - JUMAT)")
+  kurikulum       String   @default("MERDEKA")
+  kemitraan       String   @default("DALAM NEGERI")
+  jumlahRombel    String   @default("24 ROMBEL")
+  programUnggulan String   @default("TAHFIDZ")
+  kepalaSekolah   String   @default("KEPALA SEKOLAH, S.PD.")
+  photoUrl        String?
+  updatedAt       DateTime @updatedAt
+}
+
+model VisiMisi {
+  id        String   @id @default(uuid())
+  visi      String
+  misi      String
+  photoUrl  String?
+  updatedAt DateTime @updatedAt
+}
+
+model Mars {
+  id        String   @id @default(uuid())
+  title     String   @default("Mars Sekolah")
+  videoUrl  String
+  content   String?  // Lirik Mars (opsional)
+  photoUrl  String?
+  updatedAt DateTime @updatedAt
+}
+
+model KepalaSekolah {
+  id         String   @id @default(uuid())
+  title      String   @default("Kepala Sekolah")
+  content    String
+  nama       String
+  pendidikan String
+  karir      String
+  photoUrl   String?
+  updatedAt  DateTime @updatedAt
+}
+
+model Komite {
+  id        String   @id @default(uuid())
+  title     String   @default("Komite Sekolah")
+  content   String
+  photoUrl  String?
+  updatedAt DateTime @updatedAt
+}
+
+model Kurikulum {
+  id        String   @id @default(uuid())
+  title     String   @default("Kurikulum")
+  content   String?
+  photoUrl  String?
+  updatedAt DateTime @updatedAt
+}
+
+model Kesiswaan {
+  id        String   @id @default(uuid())
+  title     String   @default("Kesiswaan")
+  content   String?
+  photoUrl  String?
+  updatedAt DateTime @updatedAt
+}
+
+model Sarana {
+  id        String   @id @default(uuid())
+  title     String
+  content   String?
+  photoUrl  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model StrukturOrganisasi {
+  id        String   @id @default(uuid())
+  title     String   @default("Struktur Organisasi")
+  content   String?
+  photoUrl  String?
+  updatedAt DateTime @updatedAt
+}
+
+model Ekskul {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  pembina     String?
+  jadwal      String?
+  photoUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
