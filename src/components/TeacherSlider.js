@@ -12,7 +12,10 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
   const sliderRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [dragging, setDragging] = useState(false);
   const pausedRef = useRef(false);
+  const dragRef = useRef({ active: false, startX: 0, startScroll: 0, moved: false });
+  const justDragged = useRef(false);
 
   const setPaused = (val) => {
     pausedRef.current = val;
@@ -72,6 +75,46 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
     const index = Math.round(el.scrollLeft / step);
     const clamped = Math.max(0, Math.min(index, teachers.length - 1));
     setActiveIndex((prev) => (prev === clamped ? prev : clamped));
+  };
+
+  // Drag pakai mouse: tahan-klik lalu seret kanan/kiri (cepat, bisa loncat banyak kartu).
+  // Di HP/tablet tetap pakai swipe bawaan browser (tidak diganggu).
+  const onPointerDown = (e) => {
+    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+    const el = sliderRef.current;
+    if (!el) return;
+    dragRef.current = { active: true, startX: e.clientX, startScroll: el.scrollLeft, moved: false };
+    setDragging(true);
+    setPaused(true);
+    try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) { /* abaikan */ }
+  };
+
+  const onPointerMove = (e) => {
+    const d = dragRef.current;
+    if (!d.active) return;
+    const el = sliderRef.current;
+    if (!el) return;
+    const dx = e.clientX - d.startX;
+    if (Math.abs(dx) > 8) d.moved = true;
+    if (d.moved) el.scrollLeft = d.startScroll - dx;
+  };
+
+  const endDrag = () => {
+    const d = dragRef.current;
+    if (!d.active) return;
+    d.active = false;
+    setDragging(false);
+    if (d.moved) justDragged.current = true; // supaya lepas-drag tidak membuka halaman guru
+    setTimeout(() => setPaused(false), 2000);
+  };
+
+  // Kalau habis drag (bukan klik), batalkan navigasi ke halaman detail guru
+  const onClickCapture = (e) => {
+    if (justDragged.current) {
+      justDragged.current = false;
+      e.preventDefault();
+      e.stopPropagation();
+    }
   };
 
   // Auto slide setiap `autoPlayInterval` ms, pause saat hover/sentuh
@@ -137,17 +180,24 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
         <div
           ref={sliderRef}
           onScroll={handleScroll}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+          onClickCapture={onClickCapture}
           className="hide-scrollbar teacher-track"
           style={{
             display: 'flex',
             overflowX: 'auto',
             gap: '30px',
             padding: '20px 4px 10px 4px',
-            scrollSnapType: 'x mandatory',
+            scrollSnapType: dragging ? 'none' : 'x mandatory',
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
             width: '100%',
             WebkitOverflowScrolling: 'touch',
+            cursor: dragging ? 'grabbing' : 'grab',
+            userSelect: dragging ? 'none' : 'auto',
           }}
         >
           {teachers.map((teacher) => (
@@ -156,6 +206,7 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
               href={`/sdm/lihat/${teacher.id}/detail`}
               className="guru-card teacher-slide"
               style={{ scrollSnapAlign: 'start' }}
+              draggable={false}
             >
               <Image
                 src={teacher.photoUrl || '/images/guru1.png'}
@@ -163,6 +214,7 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
                 className="guru-image zoomable-image"
                 width={300}
                 height={300}
+                draggable={false}
               />
               <div className="guru-name-tag">{teacher.name}</div>
             </Link>
@@ -219,6 +271,10 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
         .teacher-slide {
           flex: 0 0 calc(25% - 22.5px);
           max-width: calc(25% - 22.5px);
+        }
+        .teacher-slide img {
+          -webkit-user-drag: none;
+          pointer-events: none;
         }
         @media (max-width: 1024px) {
           .teacher-slide {
