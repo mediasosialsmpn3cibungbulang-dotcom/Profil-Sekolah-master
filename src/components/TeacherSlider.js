@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 
 // Slider Guru & Pegawai ala SMAKBO:
@@ -13,6 +12,7 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [dragging, setDragging] = useState(false);
+  const [selected, setSelected] = useState(null); // guru yang dibuka di popup
   const pausedRef = useRef(false);
   const dragRef = useRef({ active: false, startX: 0, startScroll: 0, moved: false });
   const justDragged = useRef(false);
@@ -104,7 +104,7 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
     if (!d.active) return;
     d.active = false;
     setDragging(false);
-    if (d.moved) justDragged.current = true; // supaya lepas-drag tidak membuka halaman guru
+    if (d.moved) justDragged.current = true; // supaya lepas-drag tidak membuka popup
     setTimeout(() => setPaused(false), 2000);
   };
 
@@ -116,6 +116,23 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
       e.stopPropagation();
     }
   };
+
+  // Popup terbuka: kunci scroll halaman, pause auto slide, tutup pakai Escape
+  useEffect(() => {
+    if (!selected) return;
+    setPaused(true);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e) => {
+      if (e.key === 'Escape') setSelected(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', onKey);
+      setPaused(false);
+    };
+  }, [selected]);
 
   // Auto slide setiap `autoPlayInterval` ms, pause saat hover/sentuh
   useEffect(() => {
@@ -201,12 +218,17 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
           }}
         >
           {teachers.map((teacher) => (
-            <Link
+            <div
               key={teacher.id}
-              href={`/sdm/lihat/${teacher.id}/detail`}
+              role="button"
+              tabIndex={0}
+              onClick={() => setSelected(teacher)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') setSelected(teacher);
+              }}
               className="guru-card teacher-slide"
               style={{ scrollSnapAlign: 'start' }}
-              draggable={false}
+              title={`Lihat profil ${teacher.name}`}
             >
               <Image
                 src={teacher.photoUrl || '/images/guru1.png'}
@@ -217,7 +239,7 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
                 draggable={false}
               />
               <div className="guru-name-tag">{teacher.name}</div>
-            </Link>
+            </div>
           ))}
         </div>
 
@@ -259,6 +281,52 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
         ))}
       </div>
 
+      {/* Popup detail guru ala SMAKBO (pakai data yang sudah ada, tanpa fetch lagi) */}
+      {selected && (
+        <div className="teacher-modal-backdrop" onClick={() => setSelected(null)}>
+          <div
+            className="teacher-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Profil ${selected.name}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="teacher-modal-close"
+              onClick={() => setSelected(null)}
+              aria-label="Tutup"
+            >
+              ✕
+            </button>
+            <img
+              src={selected.photoUrl || '/images/guru1.png'}
+              alt={selected.name}
+              className="teacher-modal-photo"
+              draggable={false}
+            />
+            <div className="teacher-modal-body">
+              <h3 className="teacher-modal-name">{selected.name}</h3>
+              {selected.subject && (
+                <p className="teacher-modal-subject">{selected.subject}</p>
+              )}
+              {selected.additionalRole && (
+                <p className="teacher-modal-role">
+                  <strong>Jabatan Tambahan:</strong> {selected.additionalRole}
+                </p>
+              )}
+              {selected.description && (
+                <div
+                  className="teacher-modal-bio rich-text-content"
+                  dangerouslySetInnerHTML={{
+                    __html: selected.description.replace(/&nbsp;|\u00A0/g, ' '),
+                  }}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Ukuran kartu pakai <style> biasa (bukan styled-jsx) agar pasti kepakai */}
       <style>{`
         .teacher-track::-webkit-scrollbar {
@@ -275,6 +343,88 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
         .teacher-slide img {
           -webkit-user-drag: none;
           pointer-events: none;
+        }
+        /* Popup detail guru */
+        .teacher-modal-backdrop {
+          position: fixed;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(0, 0, 0, 0.7);
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          animation: teacherModalFadeIn 0.2s ease-out;
+        }
+        .teacher-modal {
+          position: relative;
+          background: white;
+          width: 100%;
+          max-width: 480px;
+          max-height: 90vh;
+          overflow-y: auto;
+          border-radius: 8px;
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+          animation: teacherModalScaleIn 0.2s ease-out;
+        }
+        .teacher-modal-close {
+          position: absolute;
+          top: 10px;
+          right: 14px;
+          background: transparent;
+          border: none;
+          font-size: 1.6rem;
+          line-height: 1;
+          cursor: pointer;
+          color: #1e293b;
+          z-index: 2;
+          padding: 4px 8px;
+        }
+        .teacher-modal-close:hover {
+          color: #dc3545;
+        }
+        .teacher-modal-photo {
+          width: 100%;
+          max-height: 420px;
+          object-fit: cover;
+          object-position: top;
+          display: block;
+          background: #f8fafc;
+        }
+        .teacher-modal-body {
+          padding: 24px 28px 30px 28px;
+          text-align: center;
+        }
+        .teacher-modal-name {
+          font-size: 1.3rem;
+          color: #1e293b;
+          margin: 0 0 6px 0;
+          font-weight: 600;
+        }
+        .teacher-modal-subject {
+          font-style: italic;
+          color: #475569;
+          margin: 0 0 12px 0;
+          font-size: 1.05rem;
+        }
+        .teacher-modal-role {
+          color: #475569;
+          font-size: 0.95rem;
+          margin: 0 0 12px 0;
+        }
+        .teacher-modal-bio {
+          color: #475569;
+          font-size: 0.95rem;
+          line-height: 1.7;
+          text-align: center;
+        }
+        @keyframes teacherModalFadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes teacherModalScaleIn {
+          from { transform: scale(0.95); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
         }
         @media (max-width: 1024px) {
           .teacher-slide {
