@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { createPortal } from 'react-dom';
 import Image from 'next/image';
+import TeacherProfileModal from '@/components/TeacherProfileModal';
 
 // Slider Guru & Pegawai ala SMAKBO:
 // - Tanpa tombol "More", semua data bisa di-slide kanan/kiri
@@ -14,7 +14,6 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
   const [isPaused, setIsPaused] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [selected, setSelected] = useState(null); // guru yang dibuka di popup
-  const [mounted, setMounted] = useState(false); // untuk portal (hindari error SSR)
   const pausedRef = useRef(false);
   const dragRef = useRef({ active: false, startX: 0, startScroll: 0, moved: false });
   const justDragged = useRef(false);
@@ -130,24 +129,13 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
     }
   };
 
-  // Tandai sudah di client agar createPortal aman
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  // Popup terbuka: pause auto slide slider
+  const closeModal = useCallback(() => setSelected(null), []);
 
-  // Popup terbuka: kunci scroll halaman, pause auto slide, tutup pakai Escape
   useEffect(() => {
     if (!selected) return;
     setPaused(true);
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    const onKey = (e) => {
-      if (e.key === 'Escape') setSelected(null);
-    };
-    window.addEventListener('keydown', onKey);
     return () => {
-      document.body.style.overflow = prevOverflow;
-      window.removeEventListener('keydown', onKey);
       setPaused(false);
     };
   }, [selected]);
@@ -299,55 +287,8 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
         ))}
       </div>
 
-      {/* Popup detail guru: di-portal ke <body> agar backdrop gelap SELAYAR penuh
-          (tidak terjebak di dalam section animasi). Foto full bingkai putih + info. */}
-      {mounted && selected && createPortal(
-        <div className="teacher-modal-backdrop" onClick={() => setSelected(null)}>
-          <div
-            className="teacher-modal"
-            role="dialog"
-            aria-modal="true"
-            aria-label={`Profil ${selected.name}`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              className="teacher-modal-close"
-              onClick={() => setSelected(null)}
-              aria-label="Tutup"
-            >
-              ✕
-            </button>
-            <div className="teacher-modal-photo-wrap">
-              <img
-                src={selected.photoUrl || '/images/guru1.png'}
-                alt={selected.name}
-                className="teacher-modal-photo"
-                draggable={false}
-              />
-            </div>
-            <div className="teacher-modal-body">
-              <h3 className="teacher-modal-name">{selected.name}</h3>
-              {selected.subject && (
-                <p className="teacher-modal-subject">{selected.subject}</p>
-              )}
-              {selected.additionalRole && (
-                <p className="teacher-modal-role">
-                  <strong>Jabatan Tambahan:</strong> {selected.additionalRole}
-                </p>
-              )}
-              {selected.description && (
-                <div
-                  className="teacher-modal-bio rich-text-content"
-                  dangerouslySetInnerHTML={{
-                    __html: selected.description.replace(/&nbsp;|\u00A0/g, ' '),
-                  }}
-                />
-              )}
-            </div>
-          </div>
-        </div>,
-        document.body
-      )}
+      {/* Popup profil guru (komponen bersama dengan halaman SDM) */}
+      <TeacherProfileModal teacher={selected} onClose={closeModal} />
       <style>{`
         .teacher-track::-webkit-scrollbar {
           display: none;
@@ -363,145 +304,6 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
         .teacher-slide img {
           -webkit-user-drag: none;
           pointer-events: none;
-        }
-        /* Popup detail guru: backdrop gelap selayar penuh seperti lightbox.
-           Layout MENYAMPING: foto full utuh di kiri, info di kanan.
-           Seluruh isi dipaksa muat 1 layar TANPA scroll. */
-        .teacher-modal-backdrop {
-          position: fixed;
-          top: 0; left: 0; right: 0; bottom: 0;
-          background: rgba(0, 0, 0, 0.85);
-          z-index: 9999;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 24px 16px;
-          overflow: hidden;
-          animation: teacherModalFadeIn 0.2s ease-out;
-        }
-        .teacher-modal {
-          position: relative;
-          width: 100%;
-          max-width: 880px;
-          height: min(86vh, 640px);
-          max-height: 92vh;
-          display: flex;
-          flex-direction: row;
-          overflow: hidden;
-          background: #ffffff;
-          border: 4px solid #ffffff;
-          border-radius: 6px;
-          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-          animation: teacherModalScaleIn 0.2s ease-out;
-          margin: auto;
-        }
-        .teacher-modal-close {
-          position: absolute;
-          top: 10px;
-          right: 10px;
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          background: rgba(0, 0, 0, 0.55);
-          border: none;
-          font-size: 1.1rem;
-          line-height: 1;
-          cursor: pointer;
-          color: #ffffff;
-          z-index: 2;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 0;
-        }
-        .teacher-modal-close:hover {
-          background: #dc3545;
-        }
-        .teacher-modal-photo-wrap {
-          flex: 0 0 42%;
-          min-width: 0;
-          min-height: 0;
-          overflow: hidden;
-          background: #ffffff;
-        }
-        .teacher-modal-photo {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          object-position: center top;
-          display: block;
-        }
-        .teacher-modal-body {
-          flex: 1 1 auto;
-          min-width: 0;
-          overflow: hidden;
-          padding: 30px 32px;
-          text-align: center;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-        }
-        .teacher-modal-name {
-          font-size: 1.4rem;
-          color: #1e293b;
-          margin: 0 0 6px 0;
-          font-weight: 600;
-        }
-        .teacher-modal-subject {
-          font-style: italic;
-          color: #475569;
-          margin: 0 0 12px 0;
-          font-size: 1.05rem;
-        }
-        .teacher-modal-role {
-          color: #475569;
-          font-size: 0.92rem;
-          margin: 0 0 12px 0;
-        }
-        .teacher-modal-bio {
-          color: #475569;
-          font-size: 0.92rem;
-          line-height: 1.7;
-          text-align: center;
-          display: -webkit-box;
-          -webkit-line-clamp: 12;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-        .teacher-modal-bio p {
-          margin: 0 0 8px 0;
-        }
-        /* Layar kecil (HP): kembali menumpuk ke bawah */
-        @media (max-width: 640px) {
-          .teacher-modal {
-            flex-direction: column;
-            max-width: 420px;
-            height: min(90vh, 720px);
-          }
-          .teacher-modal-photo-wrap {
-            flex: 0 0 42%;
-          }
-          .teacher-modal-photo {
-            object-fit: cover;
-            object-position: top;
-          }
-          .teacher-modal-body {
-            padding: 16px 20px;
-          }
-          .teacher-modal-name {
-            font-size: 1.1rem;
-          }
-          .teacher-modal-bio {
-            -webkit-line-clamp: 5;
-          }
-        }
-        @keyframes teacherModalFadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes teacherModalScaleIn {
-          from { transform: scale(0.95); opacity: 0; }
-          to { transform: scale(1); opacity: 1; }
         }
         @media (max-width: 1024px) {
           .teacher-slide {

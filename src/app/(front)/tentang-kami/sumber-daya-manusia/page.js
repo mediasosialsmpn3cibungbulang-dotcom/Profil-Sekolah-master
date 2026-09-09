@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma';
-import Link from 'next/link';
+import SdmGrid from '@/components/SdmGrid';
 
 export const revalidate = 60;
 
@@ -66,20 +66,7 @@ export default async function Page() {
       </div>
 
       <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 15px', marginBottom: '80px' }}>
-        <div className="content-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '30px' }}>
-          {teachers.length === 0 ? (
-            <p style={{ textAlign: 'center', color: '#64748b', gridColumn: '1 / -1' }}>Belum ada data guru.</p>
-          ) : (
-            teachers.map((teacher) => (
-              <Link href={`/tentang-kami/sumber-daya-manusia/baca/${teacher.id}`} className="guru-card" key={teacher.id}>
-                <img src={teacher.photoUrl || '/images/guru1.png'} alt={teacher.name} className="guru-image zoomable-image" />
-                <div className="guru-name-tag">
-                  {teacher.name}
-                </div>
-              </Link>
-            ))
-          )}
-        </div>
+        <SdmGrid teachers={teachers} />
       </div>
     </>
   );
