@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import Link from 'next/link';
 import Image from 'next/image';
 
 // Slider Guru & Pegawai ala SMAKBO:
@@ -344,19 +343,11 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
                   }}
                 />
               )}
-              <Link
-                href={`/sdm/lihat/${selected.id}/detail`}
-                className="teacher-modal-more"
-              >
-                Lihat profil lengkap →
-              </Link>
             </div>
           </div>
         </div>,
         document.body
       )}
-
-      {/* Ukuran kartu pakai <style> biasa (bukan styled-jsx) agar pasti kepakai */}
       <style>{`
         .teacher-track::-webkit-scrollbar {
           display: none;
@@ -374,8 +365,8 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
           pointer-events: none;
         }
         /* Popup detail guru: backdrop gelap selayar penuh seperti lightbox.
-           Seluruh isi dipaksa muat 1 layar TANPA scroll: tinggi modal fix,
-           foto menyusut otomatis, bio dipotong rapi pakai ellipsis. */
+           Layout MENYAMPING: foto full utuh di kiri, info di kanan.
+           Seluruh isi dipaksa muat 1 layar TANPA scroll. */
         .teacher-modal-backdrop {
           position: fixed;
           top: 0; left: 0; right: 0; bottom: 0;
@@ -391,11 +382,11 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
         .teacher-modal {
           position: relative;
           width: 100%;
-          max-width: 500px;
-          height: min(88vh, 780px);
+          max-width: 880px;
+          height: min(86vh, 640px);
           max-height: 92vh;
           display: flex;
-          flex-direction: column;
+          flex-direction: row;
           overflow: hidden;
           background: #ffffff;
           border: 4px solid #ffffff;
@@ -427,77 +418,81 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
           background: #dc3545;
         }
         .teacher-modal-photo-wrap {
-          flex: 1 1 auto;
-          min-height: 140px;
+          flex: 0 0 42%;
+          min-width: 0;
+          min-height: 0;
           overflow: hidden;
-          background: #f8fafc;
+          background: #ffffff;
         }
         .teacher-modal-photo {
           width: 100%;
           height: 100%;
-          object-fit: cover;
-          object-position: top;
+          object-fit: contain;
+          object-position: center top;
           display: block;
         }
         .teacher-modal-body {
-          flex: 0 0 auto;
-          padding: 16px 24px 18px 24px;
+          flex: 1 1 auto;
+          min-width: 0;
+          overflow: hidden;
+          padding: 30px 32px;
           text-align: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
         .teacher-modal-name {
-          font-size: 1.15rem;
+          font-size: 1.4rem;
           color: #1e293b;
-          margin: 0 0 4px 0;
+          margin: 0 0 6px 0;
           font-weight: 600;
         }
         .teacher-modal-subject {
           font-style: italic;
           color: #475569;
-          margin: 0 0 8px 0;
-          font-size: 0.98rem;
+          margin: 0 0 12px 0;
+          font-size: 1.05rem;
         }
         .teacher-modal-role {
           color: #475569;
-          font-size: 0.88rem;
-          margin: 0 0 8px 0;
+          font-size: 0.92rem;
+          margin: 0 0 12px 0;
         }
         .teacher-modal-bio {
           color: #475569;
-          font-size: 0.88rem;
-          line-height: 1.6;
+          font-size: 0.92rem;
+          line-height: 1.7;
           text-align: center;
           display: -webkit-box;
-          -webkit-line-clamp: 4;
+          -webkit-line-clamp: 12;
           -webkit-box-orient: vertical;
           overflow: hidden;
         }
         .teacher-modal-bio p {
-          margin: 0 0 6px 0;
+          margin: 0 0 8px 0;
         }
-        .teacher-modal-more {
-          display: inline-block;
-          margin-top: 10px;
-          color: #2589ff;
-          font-size: 0.9rem;
-          font-weight: 600;
-          text-decoration: none;
-        }
-        .teacher-modal-more:hover {
-          text-decoration: underline;
-        }
-        /* Layar pendek: rapatkan lagi agar tetap muat 1 layar */
-        @media (max-height: 700px) {
+        /* Layar kecil (HP): kembali menumpuk ke bawah */
+        @media (max-width: 640px) {
+          .teacher-modal {
+            flex-direction: column;
+            max-width: 420px;
+            height: min(90vh, 720px);
+          }
           .teacher-modal-photo-wrap {
-            min-height: 100px;
+            flex: 0 0 42%;
+          }
+          .teacher-modal-photo {
+            object-fit: cover;
+            object-position: top;
           }
           .teacher-modal-body {
-            padding: 12px 20px 14px 20px;
+            padding: 16px 20px;
           }
           .teacher-modal-name {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
           }
           .teacher-modal-bio {
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 5;
           }
         }
         @keyframes teacherModalFadeIn {
