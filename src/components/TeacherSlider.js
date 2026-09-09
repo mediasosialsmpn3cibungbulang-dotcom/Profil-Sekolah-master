@@ -79,14 +79,17 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
 
   // Drag pakai mouse: tahan-klik lalu seret kanan/kiri (cepat, bisa loncat banyak kartu).
   // Di HP/tablet tetap pakai swipe bawaan browser (tidak diganggu).
+  // PENTING: pointer capture HANYA dipasang setelah terbukti menyeret,
+  // supaya klik biasa tetap mendarat di kartu dan popup bisa terbuka.
   const onPointerDown = (e) => {
     if (e.pointerType !== 'mouse' || e.button !== 0) return;
     const el = sliderRef.current;
     if (!el) return;
-    dragRef.current = { active: true, startX: e.clientX, startScroll: el.scrollLeft, moved: false };
+    dragRef.current = { active: true, startX: e.clientX, startScroll: el.scrollLeft, moved: false, captured: false };
     setDragging(true);
     setPaused(true);
-    try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) { /* abaikan */ }
+    window.addEventListener('pointerup', endDrag);
+    window.addEventListener('pointercancel', endDrag);
   };
 
   const onPointerMove = (e) => {
@@ -95,7 +98,13 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
     const el = sliderRef.current;
     if (!el) return;
     const dx = e.clientX - d.startX;
-    if (Math.abs(dx) > 8) d.moved = true;
+    if (Math.abs(dx) > 8) {
+      d.moved = true;
+      if (!d.captured) {
+        d.captured = true;
+        try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) { /* abaikan */ }
+      }
+    }
     if (d.moved) el.scrollLeft = d.startScroll - dx;
   };
 
@@ -104,6 +113,8 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
     if (!d.active) return;
     d.active = false;
     setDragging(false);
+    window.removeEventListener('pointerup', endDrag);
+    window.removeEventListener('pointercancel', endDrag);
     if (d.moved) justDragged.current = true; // supaya lepas-drag tidak membuka popup
     setTimeout(() => setPaused(false), 2000);
   };
