@@ -1,7 +1,13 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.0 (Production Ready - Fully Deployed Architecture)  
+**Version:** 2.1 (Production — Slider Guru, Popup Profil & Hardening Admin)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.1 (Sep 2026):** Beranda Guru menjadi slider ala SMAKBO (panah, drag,
+dots, auto-slide, tanpa tombol More); klik foto membuka popup profil
+(`TeacherProfileModal`: foto utuh + info kanan, muat 1 layar); halaman SDM memakai
+popup yang sama dan rute `.../sumber-daya-manusia/baca/[id]` dihapus; path `/admin`
+disamarkan + `JWT_SECRET` produksi acak + nama cookie session disamarkan.
 
 ---
 
@@ -32,11 +38,13 @@ Website profil resmi **SMPN 3 Cibungbulang** dibangun sebagai gerbang informasi 
 - **Sharp (`sharp`):** Pemrosesan gambar otomatis di sisi server. Setiap foto yang diunggah dikompresi, disesuaikan resolusinya (maks. 1920px), dan diubah menjadi format modern `.webp` berukuran ringan.
 - **React Quill (`react-quill-new`):** Rich Text Editor berbasis WYSIWYG untuk penulisan artikel, biografi, dan deskripsi berformat rapi (Bold, Italic, List, Alignment).
 - **Global Lightbox (`GlobalLightbox.js`):** Fitur pratinjau dan *zoom* gambar layar penuh interaktif di seluruh halaman website.
+- **Slider & Popup Guru (`TeacherSlider.js`, `TeacherProfileModal.js`, `SdmGrid.js`):** Galeri guru geser kanan/kiri + drag (desktop) / swipe (HP) dengan dots dan auto-slide; klik foto membuka popup profil (foto utuh + nama, jabatan/mapel, jabatan tambahan, biografi) yang di-portal ke `<body>` agar backdrop gelap selayar penuh. Dipakai di beranda dan halaman SDM.
 
 ### 3.4. Keamanan & Autentikasi
-- **Next.js Middleware (`src/middleware.js`):** Proteksi rute router terpusat yang memverifikasi sesi JWT pada semua akses `/admin/*` dan me-redirect otomatis pengguna tak terotorisasi.
+- **Next.js Proxy (`src/proxy.js`):** Proteksi rute router terpusat yang memverifikasi sesi JWT pada semua akses panel admin dan me-redirect otomatis pengguna tak terotorisasi.
+- **Path Admin Disamarkan:** URL panel admin BUKAN `/admin` (yang lama 404). Nilai path asli hanya ada di server, tidak ditulis di dokumen/repo.
 - **Bcrypt.js (`bcryptjs`):** Enkripsi *hashing* satu arah untuk kata sandi administrator.
-- **Jose JWT (`jose`):** Tiket otentikasi sesi berbasis *HttpOnly Cookie* yang aman dari serangan XSS.
+- **Jose JWT (`jose`):** Tiket otentikasi sesi berbasis *HttpOnly Cookie* (nama cookie disamarkan) yang aman dari serangan XSS; ditandatangani `JWT_SECRET` acak yang hanya tersimpan di `.env.production` server (git-ignored, tidak ikut ke GitHub).
 - **In-Memory Rate Limiting:** Proteksi *brute-force* pada endpoint `/api/auth/login` (maks. 5 kali percobaan gagal per 15 menit).
 - **Toast Notification UI (`Toast.js`):** Notifikasi in-app modern menggantikan seluruh dialog browser bawaan (*alert localhost*).
 
@@ -49,7 +57,7 @@ Website profil resmi **SMPN 3 Cibungbulang** dibangun sebagai gerbang informasi 
    - Dynamic Hero Banner Slider (mengambil data dari CMS).
    - Sambutan Singkat Kepala Sekolah & Profil Utama.
    - Papan Prestasi Siswa Terkini.
-   - Daftar Cuplikan Tenaga Pendidik & Pegawai.
+   - **Guru & Pegawai: slider interaktif** (panah, tahan-seret/drag, dots, auto-slide tiap 3 detik); klik foto membuka **popup profil** (foto utuh + nama, jabatan/mapel, jabatan tambahan, biografi), tanpa tombol More.
    - Slider Berita & Kegiatan Sekolah Terbaru.
    - Footer informatif dengan integrasi Google Maps, jam kerja, kontak, dan tautan media sosial.
 2. **Tentang Kami**:
@@ -63,34 +71,37 @@ Website profil resmi **SMPN 3 Cibungbulang** dibangun sebagai gerbang informasi 
    - **Kesiswaan (`/tentang-kami/kesiswaan`)**
    - **Sarana & Prasarana (`/tentang-kami/sarana-prasarana` & `/tentang-kami/sarana-prasarana/baca/[id]`)**
    - **Struktur Organisasi (`/tentang-kami/struktur-organisasi`)** (Bagan organisasi dengan zoomable lightbox).
-   - **Sumber Daya Manusia (`/tentang-kami/sumber-daya-manusia` & `/sdm/lihat/[id]/[slug]`)**
+    - **Sumber Daya Manusia (`/tentang-kami/sumber-daya-manusia`)**: Grid foto guru/pegawai; klik foto membuka **popup profil yang sama dengan beranda** (foto utuh + info kanan). Rute detail `.../sumber-daya-manusia/baca/[id]` sudah **dihapus**.
+    - **Direktori SDM alternatif (`/sdm` & `/sdm/lihat/[id]/[slug]`)**: Grid + halaman detail profil (tetap dipertahankan).
 3. **Prestasi Siswa (`/prestasi` & `/prestasi/[id]`)**: Katalog pencapaian lomba siswa dengan detail liputan dan foto.
 4. **Ekstrakurikuler (`/ekskul` & `/ekskul/[id]`)**: Direktori kegiatan ekskul lengkap dengan nama pembina, jadwal, dan galeri kegiatan.
 5. **Berita & Kegiatan (`/berita` & `/berita/[id]`)**: Portal artikel berita sekolah dengan pencarian dan pagination.
 
 ---
 
-### 4.2. Panel Administrator (CMS Backend `/admin`)
-Panel admin memiliki tata letak sidebar responsif dengan navigasi terstruktur:
+### 4.2. Panel Administrator (CMS Backend — path URL dirahasiakan, bukan `/admin`)
+Panel admin memiliki tata letak sidebar responsif dengan navigasi terstruktur
+(seluruh sub-path di bawah path admin rahasia, mis. `<rahasia>/login`,
+`<rahasia>/posts`, dst.):
 
-1. **Dashboard (`/admin/dashboard`)**: Ringkasan statistik konten dan status sistem.
+1. **Dashboard (`/<path-admin>/dashboard`)**: Ringkasan statistik konten dan status sistem.
 2. **Kelola Konten Beranda & Informasi Utama**:
-   - **Kelola Banner Slider (`/admin/sliders`)**: Tambah/ubah foto banner beranda beserta urutan tampilnya.
-   - **Kelola Berita (`/admin/posts`)**: Editor CRUD berita lengkap dengan Rich Text dan upload gambar.
-   - **Kelola Prestasi (`/admin/achievements`)**: Manajemen prestasi siswa (kategori, nama siswa, tingkat kejuaraan).
-   - **Kelola Data Guru (`/admin/teachers`)**: Manajemen data tenaga pendidik dan kependidikan.
-   - **Kelola Ekstrakurikuler (`/admin/ekskul`)**: Manajemen kegiatan ekskul dan jadwal.
-   - **Kelola Sambutan (`/admin/sambutan`)**: Pengaturan foto dan sambutan Kepala Sekolah.
+   - **Kelola Banner Slider (`/<path-admin>/sliders`)**: Tambah/ubah foto banner beranda beserta urutan tampilnya.
+   - **Kelola Berita (`/<path-admin>/posts`)**: Editor CRUD berita lengkap dengan Rich Text dan upload gambar.
+   - **Kelola Prestasi (`/<path-admin>/achievements`)**: Manajemen prestasi siswa (kategori, nama siswa, tingkat kejuaraan).
+   - **Kelola Data Guru (`/<path-admin>/teachers`)**: Manajemen data tenaga pendidik dan kependidikan.
+   - **Kelola Ekstrakurikuler (`/<path-admin>/ekskul`)**: Manajemen kegiatan ekskul dan jadwal.
+   - **Kelola Sambutan (`/<path-admin>/sambutan`)**: Pengaturan foto dan sambutan Kepala Sekolah.
 3. **Kelola Menu Tentang Kami**:
-   - **Kelola Sejarah (`/admin/sejarah`)**
-   - **Kelola Profil (`/admin/profil`)**
-   - **Kelola Visi Misi (`/admin/visi-misi`)**
-   - **Kelola Mars (`/admin/mars`)**
-   - **Kelola Kepala Sekolah (`/admin/kepala-sekolah`)**
-   - **Kelola Kurikulum (`/admin/kurikulum`)**
-   - **Kelola Kesiswaan (`/admin/kesiswaan`)**
-   - **Kelola Sarana Prasarana (`/admin/sarana` & `/admin/sarana/form`)**
-   - **Kelola Struktur Organisasi (`/admin/struktur-organisasi`)**
+   - **Kelola Sejarah (`/<path-admin>/sejarah`)**
+   - **Kelola Profil (`/<path-admin>/profil`)**
+   - **Kelola Visi Misi (`/<path-admin>/visi-misi`)**
+   - **Kelola Mars (`/<path-admin>/mars`)**
+   - **Kelola Kepala Sekolah (`/<path-admin>/kepala-sekolah`)**
+   - **Kelola Kurikulum (`/<path-admin>/kurikulum`)**
+   - **Kelola Kesiswaan (`/<path-admin>/kesiswaan`)**
+   - **Kelola Sarana Prasarana (`/<path-admin>/sarana` & `/<path-admin>/sarana/form`)**
+   - **Kelola Struktur Organisasi (`/<path-admin>/struktur-organisasi`)**
 
 ---
 
@@ -100,24 +111,33 @@ Panel admin memiliki tata letak sidebar responsif dengan navigasi terstruktur:
 [ Pengunjung di Internet ]
            │ (HTTPS)
            ▼
-[ Domain sch.id (JagoanHosting) ] ──(Nameserver)──► [ Cloudflare Edge / WAF / Anti-DDoS ]
-                                                                 │ (Encrypted Tunnel)
-                                                                 ▼
-                                                    [ PC Server Sekolah (Windows) ]
-                                                    - PM2 Service (Port 3000)
-                                                    - SQLite Database (dev.db)
-                                                    - Media Folder (/public/uploads)
+[ Domain smpn3-cibungbulang.sch.id ]
+   (terdaftar via JagoanHosting, nameserver diarahkan ke Cloudflare)
+           ▼
+[ Cloudflare Edge / WAF / Anti-DDoS / SSL ]
+           │ (Tunnel terenkripsi, tanpa port-forwarding)
+           ▼
+[ PC Server Sekolah — Windows 11 (DESKTOP-N57DO3D) ]
+- cloudflared sebagai Windows Service → http://localhost:3000
+- PM2 app "web-sekolah" (Next.js production, port 3000)
+- SQLite Database (dev.db, git-ignored — wajib backup manual)
+- Media Folder (/public/uploads, git-ignored)
+- Env produksi (.env.production berisi JWT_SECRET, git-ignored)
 ```
 
-1. **Build Produksi:** `npm run build` mengompilasi seluruh 38 rute statis & dinamis serta 17 REST API endpoint.
-2. **Jalankan Server:** `npm start` atau `pm2 start npm --name "web-sekolah" -- start`.
-3. **Koneksi Tunnel:** `cloudflared tunnel run --url http://localhost:3000 server-sekolah`.
+1. **Update kode:** `git pull origin main` di `C:\WEB SEKOLAH\Profil-Sekolah-master`.
+2. **Build Produksi:** `npm run build` mengompilasi seluruh rute & REST API endpoint.
+3. **Jalankan Ulang:** `pm2 restart web-sekolah && pm2 save`.
+4. **Verifikasi:** `curl http://localhost:3000/` harus HTTP 200; cek `pm2 logs web-sekolah`.
+5. Detail lengkap server, backup, rollback & troubleshooting: lihat `Server.md`.
 
 ---
 
 ## 6. Standar Keamanan & Pemeliharaan
-- **Zero Port-Forwarding:** Tidak ada port router yang dibuka ke publik; lalu lintas diarahkan eksklusif via Cloudflare Tunnel.
+- **Zero Port-Forwarding:** Tidak ada port router yang dibuka ke publik; lalu lintas diarahkan eksklusif via Cloudflare Tunnel (service Windows, auto-start).
+- **Rahasia Tidak Di-commit:** `JWT_SECRET`, path admin, `dev.db`, dan `public/uploads` di-`.gitignore`; hanya ada di server. Mengganti `JWT_SECRET` membuat semua sesi admin logout sekali.
 - **Penyimpanan Upload Aman:** Validasi MIME-type ketat hanya untuk berkas gambar (`image/*`) dengan batas ukuran 20MB.
+- **Backup Wajib Berkala:** Database & foto tidak ikut ke GitHub — salin `dev.db` + `public/uploads` ke media eksternal minimal mingguan (prosedur di `Server.md`).
 - **Pembersihan Rutin:** Script pemeliharaan dan berkas uji coba (*scratch files*) dieksklusi secara ketat melalui `.gitignore`.
 
 ---
