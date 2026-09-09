@@ -2,9 +2,10 @@
 
 import { useState, useEffect, useRef } from "react";
 import RichTextEditor from "@/components/RichTextEditor";
+import Image from "next/image";
 import Toast from "@/components/Toast";
 
-export default function AdminStruktur() {
+export default function AdminKurikulum() {
   const [form, setForm] = useState({
     title: "",
     content: "",
@@ -22,12 +23,12 @@ export default function AdminStruktur() {
   };
 
   useEffect(() => {
-    fetchStruktur();
+    fetchKurikulum();
   }, []);
 
-  const fetchStruktur = async () => {
+  const fetchKurikulum = async () => {
     try {
-      const res = await fetch("/api/struktur-organisasi");
+      const res = await fetch("/api/kurikulum");
       const data = await res.json();
       if (data && Object.keys(data).length > 0) {
         setForm({
@@ -37,7 +38,7 @@ export default function AdminStruktur() {
         });
       }
     } catch (error) {
-      console.error("Error fetching Struktur:", error);
+      console.error("Error fetching Kurikulum:", error);
     } finally {
       setInitialLoading(false);
     }
@@ -81,7 +82,7 @@ export default function AdminStruktur() {
 
       const payload = { ...form, photoUrl: finalImageUrl };
 
-      const res = await fetch("/api/struktur-organisasi", {
+      const res = await fetch("/api/kurikulum", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -90,7 +91,7 @@ export default function AdminStruktur() {
       if (!res.ok) {
         if (res.status === 401) {
           showNotification("Sesi Anda telah habis, silakan login kembali.", "error");
-          setTimeout(() => { window.location.href = "/admin/login"; }, 1500);
+          setTimeout(() => { window.location.href = "/operator-8da0c2/login"; }, 1500);
         } else {
           showNotification("Gagal menyimpan data.", "error");
         }
@@ -100,10 +101,10 @@ export default function AdminStruktur() {
 
       setImageFile(null);
       if (fileInputRef.current) fileInputRef.current.value = "";
-      showNotification("Struktur Organisasi berhasil disimpan!", "success");
-      fetchStruktur();
+      showNotification("Kurikulum berhasil disimpan!", "success");
+      fetchKurikulum();
     } catch (error) {
-      console.error("Error updating Struktur:", error);
+      console.error("Error updating Kurikulum:", error);
       showNotification("Terjadi kesalahan sistem", "error");
     } finally {
       setLoading(false);
@@ -117,11 +118,11 @@ export default function AdminStruktur() {
   return (
     <div>
       <Toast notification={notification} onClose={() => setNotification({ message: '', type: '' })} />
-      <h2 style={{ fontSize: "2rem", marginBottom: "20px", color: "#1e293b" }}>Kelola Struktur Organisasi</h2>
+      <h2 style={{ fontSize: "2rem", marginBottom: "20px", color: "#1e293b" }}>Kelola Kurikulum</h2>
       
       <div style={{ background: "white", padding: "20px", borderRadius: "8px", boxShadow: "0 2px 4px rgba(0,0,0,0.05)", marginBottom: "30px" }}>
         <h3 style={{ marginBottom: "15px", fontSize: "1.2rem", color: "#334155" }}>
-          Edit Struktur Organisasi
+          Edit Informasi Kurikulum
         </h3>
 
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
@@ -139,19 +140,19 @@ export default function AdminStruktur() {
           </div>
 
           <div>
-            <label style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}>Teks / Penjelasan Tambahan (Opsional)</label>
-            <RichTextEditor
-              value={form.content}
-              onChange={(val) => setForm({ ...form, content: val })}
-              style={{ height: '300px', marginBottom: '50px', background: 'white' }}
-            />
+            <label style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}>Isi Teks Kurikulum (Opsional)</label>
+          <RichTextEditor
+            value={form.content}
+            onChange={(val) => setForm({ ...form, content: val })}
+            style={{ height: '300px', marginBottom: '50px', background: 'white' }}
+          />
           </div>
 
           <div>
-            <label style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}>Gambar Struktur Organisasi</label>
+            <label style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}>Gambar/Bagan Kurikulum</label>
             {form.photoUrl && !imageFile && (
               <div style={{ marginBottom: "10px" }}>
-                <img src={form.photoUrl} alt="Struktur Organisasi" style={{ maxWidth: "300px", borderRadius: "8px", border: "2px solid #e2e8f0" }} />
+                <img src={form.photoUrl} alt="Kurikulum Sekolah" style={{ maxWidth: "300px", borderRadius: "8px", border: "2px solid #e2e8f0" }} />
               </div>
             )}
             {imageFile && (

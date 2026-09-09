@@ -61,7 +61,7 @@ export async function POST(request) {
 
       // Set HttpOnly cookie
       response.cookies.set({
-        name: 'admin_session',
+        name: 'operator_8da0c2_session',
         value: jwt,
         httpOnly: true,
         path: '/',

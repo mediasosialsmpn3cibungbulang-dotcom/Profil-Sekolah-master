@@ -44,7 +44,7 @@ function SaranaFormContent() {
         });
       } else {
         showNotification("Fasilitas tidak ditemukan", "error");
-        setTimeout(() => router.push("/admin/sarana"), 1200);
+        setTimeout(() => router.push("/operator-8da0c2/sarana"), 1200);
       }
     } catch (error) {
       console.error("Error fetching Sarana:", error);
@@ -103,7 +103,7 @@ function SaranaFormContent() {
       if (!res.ok) {
         if (res.status === 401) {
           showNotification("Sesi Anda telah habis, silakan login kembali.", "error");
-          setTimeout(() => { window.location.href = "/admin/login"; }, 1500);
+          setTimeout(() => { window.location.href = "/operator-8da0c2/login"; }, 1500);
         } else {
           showNotification("Gagal menyimpan data.", "error");
         }
@@ -113,7 +113,7 @@ function SaranaFormContent() {
 
       showNotification("Fasilitas berhasil disimpan!", "success");
       setTimeout(() => {
-        router.push("/admin/sarana");
+        router.push("/operator-8da0c2/sarana");
       }, 1000);
     } catch (error) {
       console.error("Error updating Sarana:", error);
@@ -192,7 +192,7 @@ function SaranaFormContent() {
             </button>
             <button
               type="button"
-              onClick={() => router.push("/admin/sarana")}
+              onClick={() => router.push("/operator-8da0c2/sarana")}
               style={{
                 background: "#94a3b8", color: "white", padding: "12px 20px", borderRadius: "6px",
                 border: "none", fontWeight: "bold", cursor: "pointer"

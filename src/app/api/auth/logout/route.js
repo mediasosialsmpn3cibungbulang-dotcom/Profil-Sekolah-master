@@ -4,7 +4,7 @@ export async function POST() {
   const response = NextResponse.json({ success: true, message: 'Logged out successfully' });
   
   response.cookies.set({
-    name: 'admin_session',
+    name: 'operator_8da0c2_session',
     value: '',
     httpOnly: true,
     path: '/',

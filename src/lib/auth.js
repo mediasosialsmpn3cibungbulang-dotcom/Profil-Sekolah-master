@@ -4,7 +4,7 @@ import { jwtVerify } from 'jose';
 export async function isAuthenticated() {
   try {
     const cookieStore = await cookies();
-    const token = cookieStore.get('admin_session');
+    const token = cookieStore.get('operator_8da0c2_session');
     
     if (!token) return false;
 

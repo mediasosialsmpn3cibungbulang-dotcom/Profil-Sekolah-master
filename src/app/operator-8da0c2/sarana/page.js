@@ -54,7 +54,7 @@ export default function AdminSarana() {
       <Toast notification={notification} onClose={() => setNotification({ message: '', type: '' })} />
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
         <h2 style={{ fontSize: "2rem", color: "#1e293b", margin: 0 }}>Kelola Sarana & Prasarana</h2>
-        <Link href="/admin/sarana/form" style={{
+        <Link href="/operator-8da0c2/sarana/form" style={{
           background: "#10b981", color: "white", padding: "10px 20px", 
           borderRadius: "6px", textDecoration: "none", fontWeight: "bold"
         }}>
@@ -90,7 +90,7 @@ export default function AdminSarana() {
                     {new Date(item.createdAt).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' })}
                   </td>
                   <td style={{ padding: "15px", textAlign: "center" }}>
-                    <Link href={`/admin/sarana/form?id=${item.id}`} style={{
+                    <Link href={`/operator-8da0c2/sarana/form?id=${item.id}`} style={{
                       background: "#3b82f6", color: "white", padding: "6px 12px", 
                       borderRadius: "4px", textDecoration: "none", fontSize: "0.85rem", marginRight: "10px"
                     }}>

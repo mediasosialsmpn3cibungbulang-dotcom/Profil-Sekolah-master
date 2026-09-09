@@ -90,7 +90,7 @@ export default function AdminKepalaSekolah() {
       if (!res.ok) {
         if (res.status === 401) {
           showNotification("Sesi Anda telah habis, silakan login kembali.", "error");
-          setTimeout(() => { window.location.href = "/admin/login"; }, 1500);
+          setTimeout(() => { window.location.href = "/operator-8da0c2/login"; }, 1500);
         } else {
           showNotification("Gagal menyimpan data.", "error");
         }

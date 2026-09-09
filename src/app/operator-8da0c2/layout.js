@@ -7,20 +7,20 @@ export default function AdminLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
 
-  const isContentActive = ['/admin/posts', '/admin/achievements', '/admin/teachers', '/admin/sliders', '/admin/sambutan', '/admin/ekskul'].includes(pathname);
+  const isContentActive = ['/operator-8da0c2/posts', '/operator-8da0c2/achievements', '/operator-8da0c2/teachers', '/operator-8da0c2/sliders', '/operator-8da0c2/sambutan', '/operator-8da0c2/ekskul'].includes(pathname);
   const [isContentMenuOpen, setIsContentMenuOpen] = useState(isContentActive);
 
-  const isTentangKamiActive = ['/admin/sejarah', '/admin/profil', '/admin/visi-misi', '/admin/mars', '/admin/kepala-sekolah', '/admin/kurikulum', '/admin/kesiswaan', '/admin/sarana', '/admin/struktur-organisasi'].includes(pathname);
+  const isTentangKamiActive = ['/operator-8da0c2/sejarah', '/operator-8da0c2/profil', '/operator-8da0c2/visi-misi', '/operator-8da0c2/mars', '/operator-8da0c2/kepala-sekolah', '/operator-8da0c2/kurikulum', '/operator-8da0c2/kesiswaan', '/operator-8da0c2/sarana', '/operator-8da0c2/struktur-organisasi'].includes(pathname);
   const [isTentangKamiMenuOpen, setIsTentangKamiMenuOpen] = useState(isTentangKamiActive);
 
   // If we are on the login page, don't show the sidebar
-  if (pathname === '/admin/login') {
+  if (pathname === '/operator-8da0c2/login') {
     return <>{children}</>;
   }
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' });
-    router.push('/admin/login');
+    router.push('/operator-8da0c2/login');
     router.refresh();
   };
 
@@ -39,10 +39,10 @@ export default function AdminLayout({ children }) {
         <nav style={{ flex: 1, padding: '20px' }}>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
             <li style={{ marginBottom: '10px' }}>
-              <a href="/admin/dashboard" style={{ 
-                display: 'block', padding: '12px 15px', color: pathname === '/admin/dashboard' ? 'white' : '#cbd5e1',
-                background: pathname === '/admin/dashboard' ? '#1e293b' : 'transparent',
-                borderRadius: '8px', textDecoration: 'none', transition: 'all 0.2s', fontWeight: pathname === '/admin/dashboard' ? 'bold' : 'normal'
+              <a href="/operator-8da0c2/dashboard" style={{ 
+                display: 'block', padding: '12px 15px', color: pathname === '/operator-8da0c2/dashboard' ? 'white' : '#cbd5e1',
+                background: pathname === '/operator-8da0c2/dashboard' ? '#1e293b' : 'transparent',
+                borderRadius: '8px', textDecoration: 'none', transition: 'all 0.2s', fontWeight: pathname === '/operator-8da0c2/dashboard' ? 'bold' : 'normal'
               }}>
                 Dashboard
               </a>
@@ -71,61 +71,61 @@ export default function AdminLayout({ children }) {
               }}>
                 <ul style={{ listStyle: 'none', padding: '10px 0', margin: 0 }}>
                   <li>
-                    <a href="/admin/posts" style={{ 
-                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/admin/posts' ? 'white' : '#94a3b8',
+                    <a href="/operator-8da0c2/posts" style={{ 
+                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/operator-8da0c2/posts' ? 'white' : '#94a3b8',
                       textDecoration: 'none', transition: 'all 0.2s', fontSize: '0.9rem',
-                      fontWeight: pathname === '/admin/posts' ? 'bold' : 'normal',
-                      background: pathname === '/admin/posts' ? '#1e293b' : 'transparent'
+                      fontWeight: pathname === '/operator-8da0c2/posts' ? 'bold' : 'normal',
+                      background: pathname === '/operator-8da0c2/posts' ? '#1e293b' : 'transparent'
                     }}>
                       Kelola Berita
                     </a>
                   </li>
                   <li>
-                    <a href="/admin/achievements" style={{ 
-                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/admin/achievements' ? 'white' : '#94a3b8',
+                    <a href="/operator-8da0c2/achievements" style={{ 
+                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/operator-8da0c2/achievements' ? 'white' : '#94a3b8',
                       textDecoration: 'none', transition: 'all 0.2s', fontSize: '0.9rem',
-                      fontWeight: pathname === '/admin/achievements' ? 'bold' : 'normal',
-                      background: pathname === '/admin/achievements' ? '#1e293b' : 'transparent'
+                      fontWeight: pathname === '/operator-8da0c2/achievements' ? 'bold' : 'normal',
+                      background: pathname === '/operator-8da0c2/achievements' ? '#1e293b' : 'transparent'
                     }}>
                       Kelola Prestasi
                     </a>
                   </li>
                   <li>
-                    <a href="/admin/teachers" style={{ 
-                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/admin/teachers' ? 'white' : '#94a3b8',
+                    <a href="/operator-8da0c2/teachers" style={{ 
+                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/operator-8da0c2/teachers' ? 'white' : '#94a3b8',
                       textDecoration: 'none', transition: 'all 0.2s', fontSize: '0.9rem',
-                      fontWeight: pathname === '/admin/teachers' ? 'bold' : 'normal',
-                      background: pathname === '/admin/teachers' ? '#1e293b' : 'transparent'
+                      fontWeight: pathname === '/operator-8da0c2/teachers' ? 'bold' : 'normal',
+                      background: pathname === '/operator-8da0c2/teachers' ? '#1e293b' : 'transparent'
                     }}>
                       Kelola Guru
                     </a>
                   </li>
                   <li>
-                    <a href="/admin/ekskul" style={{ 
-                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/admin/ekskul' ? 'white' : '#94a3b8',
+                    <a href="/operator-8da0c2/ekskul" style={{ 
+                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/operator-8da0c2/ekskul' ? 'white' : '#94a3b8',
                       textDecoration: 'none', transition: 'all 0.2s', fontSize: '0.9rem',
-                      fontWeight: pathname === '/admin/ekskul' ? 'bold' : 'normal',
-                      background: pathname === '/admin/ekskul' ? '#1e293b' : 'transparent'
+                      fontWeight: pathname === '/operator-8da0c2/ekskul' ? 'bold' : 'normal',
+                      background: pathname === '/operator-8da0c2/ekskul' ? '#1e293b' : 'transparent'
                     }}>
                       Kelola Ekstrakurikuler
                     </a>
                   </li>
                   <li>
-                    <a href="/admin/sliders" style={{ 
-                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/admin/sliders' ? 'white' : '#94a3b8',
+                    <a href="/operator-8da0c2/sliders" style={{ 
+                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/operator-8da0c2/sliders' ? 'white' : '#94a3b8',
                       textDecoration: 'none', transition: 'all 0.2s', fontSize: '0.9rem',
-                      fontWeight: pathname === '/admin/sliders' ? 'bold' : 'normal',
-                      background: pathname === '/admin/sliders' ? '#1e293b' : 'transparent'
+                      fontWeight: pathname === '/operator-8da0c2/sliders' ? 'bold' : 'normal',
+                      background: pathname === '/operator-8da0c2/sliders' ? '#1e293b' : 'transparent'
                     }}>
                       Kelola Banner
                     </a>
                   </li>
                   <li>
-                    <a href="/admin/sambutan" style={{ 
-                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/admin/sambutan' ? 'white' : '#94a3b8',
+                    <a href="/operator-8da0c2/sambutan" style={{ 
+                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/operator-8da0c2/sambutan' ? 'white' : '#94a3b8',
                       textDecoration: 'none', transition: 'all 0.2s', fontSize: '0.9rem',
-                      fontWeight: pathname === '/admin/sambutan' ? 'bold' : 'normal',
-                      background: pathname === '/admin/sambutan' ? '#1e293b' : 'transparent'
+                      fontWeight: pathname === '/operator-8da0c2/sambutan' ? 'bold' : 'normal',
+                      background: pathname === '/operator-8da0c2/sambutan' ? '#1e293b' : 'transparent'
                     }}>
                       Kelola Sambutan
                     </a>
@@ -159,92 +159,92 @@ export default function AdminLayout({ children }) {
               }}>
                 <ul style={{ listStyle: 'none', padding: '10px 0', margin: 0 }}>
                   <li>
-                    <a href="/admin/sejarah" style={{ 
-                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/admin/sejarah' ? 'white' : '#94a3b8',
+                    <a href="/operator-8da0c2/sejarah" style={{ 
+                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/operator-8da0c2/sejarah' ? 'white' : '#94a3b8',
                       textDecoration: 'none', transition: 'all 0.2s', fontSize: '0.9rem',
-                      fontWeight: pathname === '/admin/sejarah' ? 'bold' : 'normal',
-                      background: pathname === '/admin/sejarah' ? '#1e293b' : 'transparent'
+                      fontWeight: pathname === '/operator-8da0c2/sejarah' ? 'bold' : 'normal',
+                      background: pathname === '/operator-8da0c2/sejarah' ? '#1e293b' : 'transparent'
                     }}>
                       Kelola Sejarah
                     </a>
                   </li>
                   <li>
-                    <a href="/admin/profil" style={{ 
-                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/admin/profil' ? 'white' : '#94a3b8',
+                    <a href="/operator-8da0c2/profil" style={{ 
+                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/operator-8da0c2/profil' ? 'white' : '#94a3b8',
                       textDecoration: 'none', transition: 'all 0.2s', fontSize: '0.9rem',
-                      fontWeight: pathname === '/admin/profil' ? 'bold' : 'normal',
-                      background: pathname === '/admin/profil' ? '#1e293b' : 'transparent'
+                      fontWeight: pathname === '/operator-8da0c2/profil' ? 'bold' : 'normal',
+                      background: pathname === '/operator-8da0c2/profil' ? '#1e293b' : 'transparent'
                     }}>
                       Kelola Profil
                     </a>
                   </li>
                   <li>
-                    <a href="/admin/visi-misi" style={{ 
-                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/admin/visi-misi' ? 'white' : '#94a3b8',
+                    <a href="/operator-8da0c2/visi-misi" style={{ 
+                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/operator-8da0c2/visi-misi' ? 'white' : '#94a3b8',
                       textDecoration: 'none', transition: 'all 0.2s', fontSize: '0.9rem',
-                      fontWeight: pathname === '/admin/visi-misi' ? 'bold' : 'normal',
-                      background: pathname === '/admin/visi-misi' ? '#1e293b' : 'transparent'
+                      fontWeight: pathname === '/operator-8da0c2/visi-misi' ? 'bold' : 'normal',
+                      background: pathname === '/operator-8da0c2/visi-misi' ? '#1e293b' : 'transparent'
                     }}>
                       Kelola Visi Misi
                     </a>
                   </li>
                   <li>
-                    <a href="/admin/mars" style={{ 
-                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/admin/mars' ? 'white' : '#94a3b8',
+                    <a href="/operator-8da0c2/mars" style={{ 
+                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/operator-8da0c2/mars' ? 'white' : '#94a3b8',
                       textDecoration: 'none', transition: 'all 0.2s', fontSize: '0.9rem',
-                      fontWeight: pathname === '/admin/mars' ? 'bold' : 'normal',
-                      background: pathname === '/admin/mars' ? '#1e293b' : 'transparent'
+                      fontWeight: pathname === '/operator-8da0c2/mars' ? 'bold' : 'normal',
+                      background: pathname === '/operator-8da0c2/mars' ? '#1e293b' : 'transparent'
                     }}>
                       Kelola Mars Sekolah
                     </a>
                   </li>
                   <li>
-                    <a href="/admin/kepala-sekolah" style={{ 
-                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/admin/kepala-sekolah' ? 'white' : '#94a3b8',
+                    <a href="/operator-8da0c2/kepala-sekolah" style={{ 
+                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/operator-8da0c2/kepala-sekolah' ? 'white' : '#94a3b8',
                       textDecoration: 'none', transition: 'all 0.2s', fontSize: '0.9rem',
-                      fontWeight: pathname === '/admin/kepala-sekolah' ? 'bold' : 'normal',
-                      background: pathname === '/admin/kepala-sekolah' ? '#1e293b' : 'transparent'
+                      fontWeight: pathname === '/operator-8da0c2/kepala-sekolah' ? 'bold' : 'normal',
+                      background: pathname === '/operator-8da0c2/kepala-sekolah' ? '#1e293b' : 'transparent'
                     }}>
                       Kelola Kepala Sekolah
                     </a>
                   </li>
 
                   <li>
-                    <a href="/admin/kurikulum" style={{ 
-                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/admin/kurikulum' ? 'white' : '#94a3b8',
+                    <a href="/operator-8da0c2/kurikulum" style={{ 
+                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/operator-8da0c2/kurikulum' ? 'white' : '#94a3b8',
                       textDecoration: 'none', transition: 'all 0.2s', fontSize: '0.9rem',
-                      fontWeight: pathname === '/admin/kurikulum' ? 'bold' : 'normal',
-                      background: pathname === '/admin/kurikulum' ? '#1e293b' : 'transparent'
+                      fontWeight: pathname === '/operator-8da0c2/kurikulum' ? 'bold' : 'normal',
+                      background: pathname === '/operator-8da0c2/kurikulum' ? '#1e293b' : 'transparent'
                     }}>
                       Kelola Kurikulum
                     </a>
                   </li>
                   <li>
-                    <a href="/admin/kesiswaan" style={{ 
-                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/admin/kesiswaan' ? 'white' : '#94a3b8',
+                    <a href="/operator-8da0c2/kesiswaan" style={{ 
+                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/operator-8da0c2/kesiswaan' ? 'white' : '#94a3b8',
                       textDecoration: 'none', transition: 'all 0.2s', fontSize: '0.9rem',
-                      fontWeight: pathname === '/admin/kesiswaan' ? 'bold' : 'normal',
-                      background: pathname === '/admin/kesiswaan' ? '#1e293b' : 'transparent'
+                      fontWeight: pathname === '/operator-8da0c2/kesiswaan' ? 'bold' : 'normal',
+                      background: pathname === '/operator-8da0c2/kesiswaan' ? '#1e293b' : 'transparent'
                     }}>
                       Kelola Kesiswaan
                     </a>
                   </li>
                   <li>
-                    <a href="/admin/sarana" style={{ 
-                      display: 'block', padding: '10px 15px 10px 30px', color: pathname.startsWith('/admin/sarana') ? 'white' : '#94a3b8',
+                    <a href="/operator-8da0c2/sarana" style={{ 
+                      display: 'block', padding: '10px 15px 10px 30px', color: pathname.startsWith('/operator-8da0c2/sarana') ? 'white' : '#94a3b8',
                       textDecoration: 'none', transition: 'all 0.2s', fontSize: '0.9rem',
-                      fontWeight: pathname.startsWith('/admin/sarana') ? 'bold' : 'normal',
-                      background: pathname.startsWith('/admin/sarana') ? '#1e293b' : 'transparent'
+                      fontWeight: pathname.startsWith('/operator-8da0c2/sarana') ? 'bold' : 'normal',
+                      background: pathname.startsWith('/operator-8da0c2/sarana') ? '#1e293b' : 'transparent'
                     }}>
                       Kelola Sarana & Prasarana
                     </a>
                   </li>
                   <li>
-                    <a href="/admin/struktur-organisasi" style={{ 
-                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/admin/struktur-organisasi' ? 'white' : '#94a3b8',
+                    <a href="/operator-8da0c2/struktur-organisasi" style={{ 
+                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/operator-8da0c2/struktur-organisasi' ? 'white' : '#94a3b8',
                       textDecoration: 'none', transition: 'all 0.2s', fontSize: '0.9rem',
-                      fontWeight: pathname === '/admin/struktur-organisasi' ? 'bold' : 'normal',
-                      background: pathname === '/admin/struktur-organisasi' ? '#1e293b' : 'transparent'
+                      fontWeight: pathname === '/operator-8da0c2/struktur-organisasi' ? 'bold' : 'normal',
+                      background: pathname === '/operator-8da0c2/struktur-organisasi' ? '#1e293b' : 'transparent'
                     }}>
                       Kelola Struktur Organisasi
                     </a>

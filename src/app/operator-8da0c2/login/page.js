@@ -25,7 +25,7 @@ export default function AdminLogin() {
       const data = await res.json();
 
       if (res.ok) {
-        window.location.href = '/admin/dashboard';
+        window.location.href = '/operator-8da0c2/dashboard';
       } else {
         setError(data.message || 'Gagal login, periksa kembali kredensial Anda.');
       }

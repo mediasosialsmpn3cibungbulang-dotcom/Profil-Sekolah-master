@@ -4,14 +4,14 @@ import { jwtVerify } from 'jose';
 export async function proxy(request) {
   const { pathname } = request.nextUrl;
 
-  // Protect all /admin routes except /admin/login
-  if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
-    const token = request.cookies.get('admin_session');
+  // Protect all /operator-8da0c2 routes except /operator-8da0c2/login
+  if (pathname.startsWith('/operator-8da0c2') && pathname !== '/operator-8da0c2/login') {
+    const token = request.cookies.get('operator_8da0c2_session');
     
     if (!token) {
       // Redirect to login if no session cookie
       const url = request.nextUrl.clone();
-      url.pathname = '/admin/login';
+      url.pathname = '/operator-8da0c2/login';
       return NextResponse.redirect(url);
     }
 
@@ -21,16 +21,16 @@ export async function proxy(request) {
     } catch (error) {
       // Redirect to login if token is invalid or expired
       const url = request.nextUrl.clone();
-      url.pathname = '/admin/login';
+      url.pathname = '/operator-8da0c2/login';
       const response = NextResponse.redirect(url);
-      response.cookies.delete('admin_session');
+      response.cookies.delete('operator_8da0c2_session');
       return response;
     }
   }
 
-  // Redirect root /admin and /admin/dashboard to /admin/posts to prevent 404
-  if (pathname === '/admin' || pathname === '/admin/dashboard') {
-    return NextResponse.redirect(new URL('/admin/posts', request.url));
+  // Redirect root /operator-8da0c2 and /operator-8da0c2/dashboard to /operator-8da0c2/posts to prevent 404
+  if (pathname === '/operator-8da0c2' || pathname === '/operator-8da0c2/dashboard') {
+    return NextResponse.redirect(new URL('/operator-8da0c2/posts', request.url));
   }
 
   // Pass-through, tapi untuk API: larang cache (no-store) agar
@@ -50,5 +50,5 @@ export async function proxy(request) {
 
 // Ensure proxy only runs on necessary paths to save execution time
 export const config = {
-  matcher: ['/admin/:path*', '/api/:path*'],
+  matcher: ['/operator-8da0c2/:path*', '/api/:path*'],
 };
