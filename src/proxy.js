@@ -33,11 +33,22 @@ export async function proxy(request) {
     return NextResponse.redirect(new URL('/admin/posts', request.url));
   }
 
+  // Pass-through, tapi untuk API: larang cache (no-store) agar
+  // browser/edge tidak menyajikan list lama setelah admin menyimpan data.
+  // Tanpa ini, daftar baru & gambar baru kadang baru muncul setelah refresh manual.
+  // Kecualikan /api/uploads: ia mengatur cache-nya sendiri
+  // (immutable untuk gambar ada, no-store untuk 404).
+  if (pathname.startsWith('/api/') && !pathname.startsWith('/api/uploads/')) {
+    const response = NextResponse.next();
+    response.headers.set('Cache-Control', 'no-store, must-revalidate');
+    return response;
+  }
+
   // Pass-through
   return NextResponse.next();
 }
 
 // Ensure proxy only runs on necessary paths to save execution time
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: ['/admin/:path*', '/api/:path*'],
 };

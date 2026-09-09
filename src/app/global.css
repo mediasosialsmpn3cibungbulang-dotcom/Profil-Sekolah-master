@@ -570,7 +570,7 @@ body {
 .rich-text-content ol {
   counter-reset: list-0;
 }
-.rich-text-content ol li {
+.rich-text-content ol li[data-list] {
   list-style-type: none;
 }
 .rich-text-content ol li:before {
@@ -601,6 +601,18 @@ body {
 }
 .rich-text-content ol li[data-list="ordered"].ql-indent-3:before {
   content: counter(list-3, decimal) ". ";
+}
+
+/* Fallback: <ol><li> biasa TANPA atribut data-list (mis. hasil
+   auto-number editor) tetap tampil bernomor 1, 2, 3. */
+.rich-text-content ol:not(:has(> li[data-list])) {
+  padding-left: 1.6em;
+}
+.rich-text-content ol:not(:has(> li[data-list])) > li {
+  list-style-type: decimal;
+}
+.rich-text-content ol:not(:has(> li[data-list])) > li:before {
+  content: none;
 }
 
 /* ReactQuill Bullet List */

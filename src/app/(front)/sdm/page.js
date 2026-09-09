@@ -5,7 +5,9 @@ import Image from 'next/image';
 export const revalidate = 60;
 
 export default async function Page() {
-  const teachers = await prisma.teacher.findMany();
+  const teachers = await prisma.teacher.findMany({
+    orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
+  });
 
   return (
     <>

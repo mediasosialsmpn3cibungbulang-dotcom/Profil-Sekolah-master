@@ -26,6 +26,7 @@ export default async function Home() {
   const sambutan = await prisma.sambutan.findFirst();
 
   const teachers = await prisma.teacher.findMany({
+    orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
     take: 4
   });
 

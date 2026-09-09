@@ -1,11 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import RichTextEditor from "@/components/RichTextEditor";
 import Toast from "@/components/Toast";
 
 export default function AdminTeachers() {
   const [teachers, setTeachers] = useState([]);
+  const [dragIdx, setDragIdx] = useState(null);
+  const [savingOrder, setSavingOrder] = useState(false);
   const [name, setName] = useState('');
   const [subject, setSubject] = useState('Guru Kelas');
   const [description, setDescription] = useState('');
@@ -139,6 +141,43 @@ export default function AdminTeachers() {
     }
   };
 
+  // --- Drag-and-drop urutan: posisi paling atas = foto kiri-atas di halaman publik ---
+  const handleDragStart = (index) => setDragIdx(index);
+  const handleDragOverItem = (e, index) => {
+    e.preventDefault();
+    if (dragIdx === null || dragIdx === index) return;
+    const updated = [...teachers];
+    const [moved] = updated.splice(dragIdx, 1);
+    updated.splice(index, 0, moved);
+    setTeachers(updated);
+    setDragIdx(index);
+  };
+  const handleDropItem = async () => {
+    setDragIdx(null);
+    await saveOrder();
+  };
+  const saveOrder = async (list = teachers) => {
+    setSavingOrder(true);
+    try {
+      const res = await fetch('/api/teachers/reorder', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids: list.map(t => t.id) })
+      });
+      if (res.ok) {
+        showNotification('Urutan foto berhasil disimpan!', 'success');
+      } else {
+        showNotification('Gagal menyimpan urutan', 'error');
+        fetchTeachers();
+      }
+    } catch (err) {
+      showNotification('Gagal menyimpan urutan', 'error');
+      fetchTeachers();
+    } finally {
+      setSavingOrder(false);
+    }
+  };
+
   return (
     <div>
       <Toast notification={notification} onClose={() => setNotification({ message: '', type: '' })} />
@@ -248,6 +287,10 @@ export default function AdminTeachers() {
             <h2 style={{ fontSize: '1.2rem', color: '#1e293b', margin: 0 }}>Daftar Guru</h2>
             <span style={{ background: '#e2e8f0', padding: '4px 12px', borderRadius: '20px', fontSize: '0.85rem', color: '#475569', fontWeight: 'bold' }}>Total: {teachers.length}</span>
           </div>
+          <p style={{ fontSize: '0.8rem', color: '#64748b', margin: '0 0 15px 0' }}>
+            ☰ Seret kartu ke atas/bawah untuk mengatur urutan foto. Posisi <strong>No. 1 = foto kiri-atas</strong> di halaman publik.
+            {savingOrder ? ' Menyimpan urutan...' : ''}
+          </p>
 
           {teachers.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '40px 0', color: '#94a3b8' }}>
@@ -255,8 +298,10 @@ export default function AdminTeachers() {
             </div>
           ) : (
             <div style={{ display: 'grid', gap: '15px' }}>
-              {teachers.map(t => (
-                <div key={t.id} style={{ display: 'flex', alignItems: 'center', gap: '15px', padding: '15px', border: '1px solid #e2e8f0', borderRadius: '8px', transition: 'border-color 0.2s' }} onMouseOver={e => e.currentTarget.style.borderColor = '#93c5fd'} onMouseOut={e => e.currentTarget.style.borderColor = '#e2e8f0'}>
+              {teachers.map((t, index) => (
+                <div key={t.id} draggable onDragStart={() => handleDragStart(index)} onDragOver={(e) => handleDragOverItem(e, index)} onDrop={handleDropItem} onDragEnd={() => setDragIdx(null)} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '15px', border: dragIdx === index ? '2px dashed #2563eb' : '1px solid #e2e8f0', borderRadius: '8px', transition: 'border-color 0.2s', background: dragIdx === index ? '#eff6ff' : 'white' }} onMouseOver={e => { if (dragIdx === null) e.currentTarget.style.borderColor = '#93c5fd'; }} onMouseOut={e => { if (dragIdx === null) e.currentTarget.style.borderColor = '#e2e8f0'; }}>
+                  <span title="Seret untuk mengubah urutan" style={{ cursor: 'grab', color: '#94a3b8', fontSize: '1.2rem', userSelect: 'none', flexShrink: 0 }}>☰</span>
+                  <span title="Nomor urut tampil di halaman publik" style={{ background: '#2563eb', color: 'white', minWidth: '28px', height: '28px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 'bold', flexShrink: 0 }}>{index + 1}</span>
                   <div style={{ width: '60px', height: '60px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid #e2e8f0' }}>
                     <img src={t.photoUrl || '/images/guru1.png'} alt={t.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>

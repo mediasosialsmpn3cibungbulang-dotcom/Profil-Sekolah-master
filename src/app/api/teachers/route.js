@@ -7,7 +7,7 @@ import { cookies } from 'next/headers';
 export async function GET() {
   try {
     const teachers = await prisma.teacher.findMany({
-      orderBy: { createdAt: 'desc' }
+      orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }]
     });
     return NextResponse.json(teachers);
   } catch (error) {
@@ -21,8 +21,10 @@ export async function POST(request) {
     
 
     const { name, subject, photoUrl, description, education, experience, additionalRole } = await request.json();
+    // Guru baru selalu di urutan paling bawah
+    const last = await prisma.teacher.findFirst({ orderBy: { sortOrder: 'desc' } });
     const newTeacher = await prisma.teacher.create({
-      data: { name, subject, photoUrl, description, education, experience, additionalRole }
+      data: { name, subject, photoUrl, description, education, experience, additionalRole, sortOrder: (last?.sortOrder ?? 0) + 1 }
     });
     return NextResponse.json(newTeacher);
   } catch (error) {

@@ -4,8 +4,12 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
 export const metadata = {
-  title: 'Profil Sekolah',
-  description: 'Website Profil Sekolah Resmi',
+  title: 'SMPN 3 Cibungbulang',
+  description: 'Website Profil Resmi SMPN 3 Cibungbulang',
+  icons: {
+    icon: '/images/Logo.png',
+    apple: '/images/Logo.png',
+  },
 };
 
 export default function RootLayout({ children }) {

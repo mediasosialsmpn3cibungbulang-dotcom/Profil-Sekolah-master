@@ -64,7 +64,6 @@ export default async function Page() {
               </div>
 
               <div style={{ color: '#475569', lineHeight: '1.8', fontSize: '1.05rem' }}>
-                <p style={{ marginBottom: '15px' }}>Misi SMP Negeri 3 Cibungbulang sebagai berikut:</p>
                 {visimisi?.misi ? (
                   <div className="rich-text-content" dangerouslySetInnerHTML={{ __html: visimisi.misi ? visimisi.misi.replace(/&nbsp;|\u00A0/g, ' ') : '' }} />
                 ) : (
