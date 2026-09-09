@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
 
 // Slider Guru & Pegawai ala SMAKBO:
@@ -13,6 +14,7 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
   const [isPaused, setIsPaused] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [selected, setSelected] = useState(null); // guru yang dibuka di popup
+  const [mounted, setMounted] = useState(false); // untuk portal (hindari error SSR)
   const pausedRef = useRef(false);
   const dragRef = useRef({ active: false, startX: 0, startScroll: 0, moved: false });
   const justDragged = useRef(false);
@@ -127,6 +129,11 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
       e.stopPropagation();
     }
   };
+
+  // Tandai sudah di client agar createPortal aman
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Popup terbuka: kunci scroll halaman, pause auto slide, tutup pakai Escape
   useEffect(() => {
@@ -292,8 +299,9 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
         ))}
       </div>
 
-      {/* Popup detail guru ala SMAKBO (pakai data yang sudah ada, tanpa fetch lagi) */}
-      {selected && (
+      {/* Popup detail guru: di-portal ke <body> agar backdrop gelap SELAYAR penuh
+          (tidak terjebak di dalam section animasi). Foto full bingkai putih + info. */}
+      {mounted && selected && createPortal(
         <div className="teacher-modal-backdrop" onClick={() => setSelected(null)}>
           <div
             className="teacher-modal"
@@ -335,7 +343,8 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
               )}
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* Ukuran kartu pakai <style> biasa (bukan styled-jsx) agar pasti kepakai */}
@@ -355,55 +364,64 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
           -webkit-user-drag: none;
           pointer-events: none;
         }
-        /* Popup detail guru */
+        /* Popup detail guru: backdrop gelap selayar penuh seperti lightbox */
         .teacher-modal-backdrop {
           position: fixed;
           top: 0; left: 0; right: 0; bottom: 0;
-          background: rgba(0, 0, 0, 0.7);
+          background: rgba(0, 0, 0, 0.85);
           z-index: 9999;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 20px;
+          padding: 24px 16px;
+          overflow-y: auto;
           animation: teacherModalFadeIn 0.2s ease-out;
         }
         .teacher-modal {
           position: relative;
-          background: white;
           width: 100%;
-          max-width: 480px;
-          max-height: 90vh;
+          max-width: 520px;
+          max-height: 92vh;
           overflow-y: auto;
-          border-radius: 8px;
-          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+          background: #ffffff;
+          border: 4px solid #ffffff;
+          border-radius: 6px;
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
           animation: teacherModalScaleIn 0.2s ease-out;
+          margin: auto;
         }
         .teacher-modal-close {
           position: absolute;
           top: 10px;
-          right: 14px;
-          background: transparent;
+          right: 10px;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: rgba(0, 0, 0, 0.55);
           border: none;
-          font-size: 1.6rem;
+          font-size: 1.1rem;
           line-height: 1;
           cursor: pointer;
-          color: #1e293b;
+          color: #ffffff;
           z-index: 2;
-          padding: 4px 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
         }
         .teacher-modal-close:hover {
-          color: #dc3545;
+          background: #dc3545;
         }
         .teacher-modal-photo {
           width: 100%;
-          max-height: 420px;
+          max-height: 58vh;
           object-fit: cover;
           object-position: top;
           display: block;
           background: #f8fafc;
         }
         .teacher-modal-body {
-          padding: 24px 28px 30px 28px;
+          padding: 22px 26px 28px 26px;
           text-align: center;
         }
         .teacher-modal-name {
