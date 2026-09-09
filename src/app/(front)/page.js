@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import ImageSlider from '@/components/ImageSlider';
 import NewsSlider from '@/components/NewsSlider';
+import TeacherSlider from '@/components/TeacherSlider';
 import ScrollAnimation from '@/components/ScrollAnimation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -27,7 +28,6 @@ export default async function Home() {
 
   const teachers = await prisma.teacher.findMany({
     orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
-    take: 4
   });
 
   // Helper colors for achievement cards based on index
@@ -49,43 +49,19 @@ export default async function Home() {
         </div>
       </ScrollAnimation>
 
-      <ScrollAnimation animation="fade-up">
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <h2 style={{ fontSize: '1.8rem', color: '#0f172a' }}>Tentang SMPN 3 Cibungbulang</h2>
-        </div>
-      </ScrollAnimation>
-
-      {/* 4 Features Grid - Circle Organic Design */}
-      <section className="features-grid" style={{ marginBottom: '80px' }}>
-        <ScrollAnimation animation="fade-up" delay={100}>
-          <div className="feature-card">
-            <div className="feature-circle">🏫</div>
-            <h3 className="feature-title">Fasilitas</h3>
-            <p className="feature-desc">Fasilitas lengkap & modern di seluruh lingkungan sekolah.</p>
-          </div>
+      {/* Berita dan Kegiatan - Quote Style Layout */}
+      <section style={{ borderTop: '1px solid #f1f5f9', paddingTop: '60px', marginBottom: '80px' }} id="berita">
+        <ScrollAnimation animation="fade-up">
+          <h2 className="section-title" style={{ color: '#1e293b' }}>Berita & Kegiatan</h2>
         </ScrollAnimation>
         
-        <ScrollAnimation animation="fade-up" delay={200}>
-          <div className="feature-card">
-            <div className="feature-circle" style={{ background: '#dcfce7', color: '#16a34a' }}>🏅</div>
-            <h3 className="feature-title" style={{ color: '#16a34a' }}>Prestasi</h3>
-            <p className="feature-desc">Sekolah berprestasi tinggi dalam bidang akademik dan non-akademik.</p>
-          </div>
+        <ScrollAnimation animation="fade-in" delay={150}>
+          <NewsSlider posts={posts} />
         </ScrollAnimation>
-
-        <ScrollAnimation animation="fade-up" delay={300}>
-          <div className="feature-card">
-            <div className="feature-circle" style={{ background: '#fef3c7', color: '#d97706' }}>🎨</div>
-            <h3 className="feature-title" style={{ color: '#d97706' }}>Ekskul</h3>
-            <p className="feature-desc">Berbagai kegiatan ekstrakurikuler untuk pengembangan bakat.</p>
-          </div>
-        </ScrollAnimation>
-
-        <ScrollAnimation animation="fade-up" delay={400}>
-          <div className="feature-card">
-            <div className="feature-circle" style={{ background: '#e0e7ff', color: '#4f46e5' }}>👥</div>
-            <h3 className="feature-title" style={{ color: '#4f46e5' }}>SDM</h3>
-            <p className="feature-desc">Guru profesional yang siap mendidik komunitas belajar unggul.</p>
+        
+        <ScrollAnimation animation="fade-up">
+          <div style={{ textAlign: 'center', marginBottom: '20px', marginTop: '40px' }}>
+            <Link href="/berita" style={{ color: '#2589ff', textDecoration: 'none', fontWeight: 'bold' }}>Lihat Selengkapnya ❯</Link>
           </div>
         </ScrollAnimation>
       </section>
@@ -120,6 +96,17 @@ export default async function Home() {
             )}
           </ScrollAnimation>
         </div>
+      </section>
+
+      {/* Guru dan Pegawai - Slider ala SMAKBO (tanpa tombol More) */}
+      <section style={{ borderTop: '1px solid #f1f5f9', paddingTop: '60px' }}>
+        <ScrollAnimation animation="fade-up">
+          <h2 className="section-title" style={{ color: '#1e293b' }}>Guru dan Pegawai</h2>
+        </ScrollAnimation>
+        
+        <ScrollAnimation animation="fade-in" delay={150}>
+          <TeacherSlider teachers={teachers} autoPlayInterval={3000} />
+        </ScrollAnimation>
       </section>
 
       {/* Prestasi Siswa - Tabular Meta Layout */}
@@ -164,56 +151,6 @@ export default async function Home() {
         <ScrollAnimation animation="fade-up">
           <div style={{ textAlign: 'center', marginBottom: '80px', marginTop: '30px' }}>
             <Link href="/prestasi" style={{ color: '#2589ff', textDecoration: 'none', fontWeight: 'bold' }}>Lihat Selengkapnya ❯</Link>
-          </div>
-        </ScrollAnimation>
-      </section>
-
-      {/* Guru dan Pegawai - Solid Tag Layout */}
-      <section style={{ borderTop: '1px solid #f1f5f9', paddingTop: '60px' }}>
-        <ScrollAnimation animation="fade-up">
-          <h2 className="section-title" style={{ color: '#1e293b' }}>Guru dan Pegawai</h2>
-        </ScrollAnimation>
-        
-        <div className="content-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
-          
-          {teachers.length === 0 ? (
-            <p style={{ textAlign: 'center', color: '#64748b', gridColumn: '1 / -1' }}>Belum ada data guru.</p>
-          ) : (
-            teachers.map((teacher, index) => (
-              <ScrollAnimation animation="fade-up" delay={(index + 1) * 100} key={teacher.id}>
-                {/* Updated link to match the requested route */}
-                <Link href={`/sdm/lihat/${teacher.id}/detail`} className="guru-card">
-                  <Image src={teacher.photoUrl || '/images/guru1.png'} alt={teacher.name} className="guru-image zoomable-image" width={300} height={300} />
-                  <div className="guru-name-tag">
-                    {teacher.name}
-                  </div>
-                </Link>
-              </ScrollAnimation>
-            ))
-          )}
-
-        </div>
-        
-        <ScrollAnimation animation="fade-up">
-          <div style={{ textAlign: 'center', marginBottom: '80px', marginTop: '30px' }}>
-            <Link href="/sdm" style={{ background: '#dc3545', color: 'white', padding: '10px 30px', borderRadius: '50px', textDecoration: 'none', fontWeight: 'normal', display: 'inline-block' }}>More</Link>
-          </div>
-        </ScrollAnimation>
-      </section>
-
-      {/* Berita dan Kegiatan - Quote Style Layout */}
-      <section style={{ borderTop: '1px solid #f1f5f9', paddingTop: '60px', marginBottom: '80px' }} id="berita">
-        <ScrollAnimation animation="fade-up">
-          <h2 className="section-title" style={{ color: '#1e293b' }}>Berita & Kegiatan</h2>
-        </ScrollAnimation>
-        
-        <ScrollAnimation animation="fade-in" delay={150}>
-          <NewsSlider posts={posts} />
-        </ScrollAnimation>
-        
-        <ScrollAnimation animation="fade-up">
-          <div style={{ textAlign: 'center', marginBottom: '20px', marginTop: '40px' }}>
-            <Link href="/berita" style={{ color: '#2589ff', textDecoration: 'none', fontWeight: 'bold' }}>Lihat Selengkapnya ❯</Link>
           </div>
         </ScrollAnimation>
       </section>
