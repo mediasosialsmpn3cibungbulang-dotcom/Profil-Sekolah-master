@@ -207,26 +207,35 @@ export default function TeacherSlider({ teachers = [], autoPlayInterval = 3000 }
         ))}
       </div>
 
-      <style jsx>{`
-        .hide-scrollbar::-webkit-scrollbar {
+      {/* Ukuran kartu pakai <style> biasa (bukan styled-jsx) agar pasti kepakai */}
+      <style>{`
+        .teacher-track::-webkit-scrollbar {
           display: none;
+        }
+        .teacher-track {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
         }
         .teacher-slide {
           flex: 0 0 calc(25% - 22.5px);
+          max-width: calc(25% - 22.5px);
         }
         @media (max-width: 1024px) {
           .teacher-slide {
             flex: 0 0 calc(33.333% - 20px);
+            max-width: calc(33.333% - 20px);
           }
         }
         @media (max-width: 768px) {
           .teacher-slide {
             flex: 0 0 calc(50% - 15px);
+            max-width: calc(50% - 15px);
           }
         }
         @media (max-width: 480px) {
           .teacher-slide {
             flex: 0 0 100%;
+            max-width: 100%;
           }
         }
       `}</style>
