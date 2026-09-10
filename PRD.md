@@ -1,7 +1,9 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.6 (Ikon Sosmed Selalu Tampil)  
+**Version:** 2.7 (Pegawai → Tenaga Pendidik)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.7 (Sep 2026):** Seluruh tulisan "Pegawai" di semua halaman diganti menjadi "Tenaga Pendidik" (homepage, SDM, profil, panel admin). Nilai kategori data (GURU/PEGAWAI) tidak berubah.
 
 **Changelog v2.6 (Sep 2026):** Ikon sosmed di popup profil selalu tampil
 ber tiga; yang belum diisi link-nya tampil redup dan tidak bisa diklik.
@@ -79,8 +81,8 @@ Website profil resmi **SMPN 3 Cibungbulang** dibangun sebagai gerbang informasi 
    - Dynamic Hero Banner Slider (mengambil data dari CMS).
    - Sambutan Singkat Kepala Sekolah & Profil Utama.
    - Papan Prestasi Siswa Terkini.
-   - **Guru & Pegawai: 2 slider terpisah** — section **Guru** dan section
-     **Pegawai** (masing-masing: panah, tahan-seret/drag, dots, auto-slide
+   - **Guru & Tenaga Pendidik: 2 slider terpisah** — section **Guru** dan section
+     **Tenaga Pendidik** (masing-masing: panah, tahan-seret/drag, dots, auto-slide
      tiap 3 detik); klik foto membuka **popup profil** (foto utuh + nama,
      jabatan/mapel, jabatan tambahan, biografi), tanpa tombol More.
      Kategori tersimpan di field `Teacher.category` (`GURU`/`PEGAWAI`).
@@ -97,7 +99,7 @@ Website profil resmi **SMPN 3 Cibungbulang** dibangun sebagai gerbang informasi 
    - **Sarana & Prasarana (`/tentang-kami/sarana-prasarana` & `/tentang-kami/sarana-prasarana/baca/[id]`)**
    - **Struktur Organisasi (`/tentang-kami/struktur-organisasi`)** (Bagan organisasi dengan zoomable lightbox).
     - **Sumber Daya Manusia (`/tentang-kami/sumber-daya-manusia`)**: Kembaran
-      beranda — 2 slider **Guru** + **Pegawai** (panah, drag, dots, auto-slide,
+      beranda — 2 slider **Guru** + **Tenaga Pendidik** (panah, drag, dots, auto-slide,
       popup profil). Rute detail `.../sumber-daya-manusia/baca/[id]` sudah
       **dihapus**.
     - **Direktori SDM alternatif (`/sdm` & `/sdm/lihat/[id]/[slug]`)**: Grid + halaman detail profil (tetap dipertahankan).
@@ -118,7 +120,7 @@ Panel admin memiliki tata letak sidebar responsif dengan navigasi terstruktur
    - **Kelola Berita (`/<path-admin>/posts`)**: Editor CRUD berita lengkap dengan Rich Text dan upload gambar.
    - **Kelola Prestasi (`/<path-admin>/achievements`)**: Manajemen prestasi siswa (kategori, nama siswa, tingkat kejuaraan).
    - **Kelola Data Guru (`/<path-admin>/teachers`)**: Manajemen tenaga pendidik (kategori `GURU`).
-   - **Kelola Data Pegawai (`/<path-admin>/staff`)**: Manajemen tenaga kependidikan/TU/operator (kategori `PEGAWAI`).
+   - **Kelola Data Tenaga Pendidik (`/<path-admin>/staff`)**: Manajemen tenaga kependidikan/TU/operator (kategori `PEGAWAI`).
    - **Kelola Ekstrakurikuler (`/<path-admin>/ekskul`)**: Manajemen kegiatan ekskul dan jadwal.
    - **Kelola Sambutan (`/<path-admin>/sambutan`)**: Pengaturan foto dan sambutan Kepala Sekolah.
 3. **Kelola Menu Tentang Kami**:

@@ -115,10 +115,10 @@ export default async function Home() {
         </ScrollAnimation>
       </section>
 
-      {/* Pegawai - Slider */}
+      {/* Tenaga Pendidik - Slider */}
       <section style={{ borderTop: '1px solid #f1f5f9', paddingTop: '60px' }}>
         <ScrollAnimation animation="fade-up">
-          <h2 className="section-title" style={{ color: '#1e293b' }}>Pegawai</h2>
+          <h2 className="section-title" style={{ color: '#1e293b' }}>Tenaga Pendidik</h2>
         </ScrollAnimation>
         
         <ScrollAnimation animation="fade-in" delay={150}>

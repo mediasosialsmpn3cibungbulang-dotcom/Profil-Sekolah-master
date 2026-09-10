@@ -70,7 +70,7 @@ export default async function Page({ params }) {
 
       <div className="page-header-sdm">
         <div className="title-container">
-          <h2>Profil Pegawai</h2>
+          <h2>Profil Tenaga Pendidik</h2>
         </div>
       </div>
 

@@ -60,7 +60,7 @@ export default async function Page() {
 
       <div className="page-header-sdm">
         <div className="title-container">
-          <h2>Guru dan Pegawai</h2>
+          <h2>Guru dan Tenaga Pendidik</h2>
           <p>Mengenal lebih dekat para pendidik dan tenaga kependidikan berdedikasi tinggi di sekolah kami.</p>
         </div>
       </div>

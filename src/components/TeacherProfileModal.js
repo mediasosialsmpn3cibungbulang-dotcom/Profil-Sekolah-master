@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-// Popup profil guru/pegawai: foto full utuh di kiri, info di kanan.
+// Popup profil guru/tenaga pendidik: foto full utuh di kiri, info di kanan.
 // Dipakai di slider homepage DAN di halaman Sumber Daya Manusia.
 // Data (name, subject, additionalRole, description, photoUrl,
 // instagram, tiktok, email) sudah tersedia dari query,

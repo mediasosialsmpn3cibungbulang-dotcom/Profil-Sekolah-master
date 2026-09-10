@@ -107,7 +107,7 @@ export default function AdminLayout({ children }) {
                       fontWeight: pathname === '/operator-8da0c2/staff' ? 'bold' : 'normal',
                       background: pathname === '/operator-8da0c2/staff' ? '#1e293b' : 'transparent'
                     }}>
-                      Kelola Pegawai
+                      Kelola Tenaga Pendidik
                     </a>
                   </li>
                   <li>

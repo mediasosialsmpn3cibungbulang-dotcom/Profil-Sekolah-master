@@ -100,7 +100,7 @@ export default function AdminStaff() {
         setEditingId(null);
         setExistingImageUrl('');
         if (e.target) e.target.reset(); // Reset file input
-        showNotification(editingId ? 'Data Pegawai berhasil diperbarui!' : 'Data Pegawai berhasil ditambahkan!', 'success');
+        showNotification(editingId ? 'Data Tenaga Pendidik berhasil diperbarui!' : 'Data Tenaga Pendidik berhasil ditambahkan!', 'success');
         fetchTeachers();
       } else {
         throw new Error('Gagal menyimpan data');
@@ -140,7 +140,7 @@ export default function AdminStaff() {
   };
 
   const handleDelete = async (id) => {
-    if (!confirm('Yakin ingin menghapus data pegawai ini?')) return;
+    if (!confirm('Yakin ingin menghapus data tenaga pendidik ini?')) return;
     
     try {
       const res = await fetch(`/api/teachers/${id}`, { method: 'DELETE' });
@@ -193,13 +193,13 @@ export default function AdminStaff() {
   return (
     <div>
       <Toast notification={notification} onClose={() => setNotification({ message: '', type: '' })} />
-      <h1 style={{ fontSize: '2rem', color: '#0f172a', marginBottom: '30px', fontWeight: 'bold' }}>Kelola Data Pegawai</h1>
+      <h1 style={{ fontSize: '2rem', color: '#0f172a', marginBottom: '30px', fontWeight: 'bold' }}>Kelola Data Tenaga Pendidik</h1>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px' }}>
         
         {/* Form Tambah */}
         <div style={{ background: 'white', padding: '30px', borderRadius: '12px', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', border: '1px solid #e2e8f0', alignSelf: 'start' }}>
-          <h2 style={{ fontSize: '1.2rem', color: '#1e293b', marginBottom: '25px', borderBottom: '1px solid #e2e8f0', paddingBottom: '10px' }}>{editingId ? 'Ubah Data Pegawai' : 'Tambah Pegawai Baru'}</h2>
+          <h2 style={{ fontSize: '1.2rem', color: '#1e293b', marginBottom: '25px', borderBottom: '1px solid #e2e8f0', paddingBottom: '10px' }}>{editingId ? 'Ubah Data Tenaga Pendidik' : 'Tambah Tenaga Pendidik Baru'}</h2>
           
           <form onSubmit={handleSubmit}>
             <div style={{ marginBottom: '20px' }}>
@@ -229,7 +229,7 @@ export default function AdminStaff() {
               <RichTextEditor
                 value={description} 
                 onChange={(val) => setDescription(val)} 
-                placeholder="Tuliskan biografi atau keterangan pegawai..."
+                placeholder="Tuliskan biografi atau keterangan tenaga pendidik..."
               />
             </div>
 
@@ -301,7 +301,7 @@ export default function AdminStaff() {
                   transition: 'background 0.2s'
                 }}
               >
-                {loading ? 'Menyimpan...' : (editingId ? 'Simpan Perubahan' : 'Simpan Data Pegawai')}
+                {loading ? 'Menyimpan...' : (editingId ? 'Simpan Perubahan' : 'Simpan Data Tenaga Pendidik')}
               </button>
               {editingId && (
                 <button 
@@ -319,10 +319,10 @@ export default function AdminStaff() {
           </form>
         </div>
 
-        {/* List Pegawai */}
+        {/* List Tenaga Pendidik */}
         <div style={{ background: 'white', padding: '30px', borderRadius: '12px', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', border: '1px solid #e2e8f0', alignSelf: 'start' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', borderBottom: '1px solid #e2e8f0', paddingBottom: '10px' }}>
-            <h2 style={{ fontSize: '1.2rem', color: '#1e293b', margin: 0 }}>Daftar Pegawai</h2>
+            <h2 style={{ fontSize: '1.2rem', color: '#1e293b', margin: 0 }}>Daftar Tenaga Pendidik</h2>
             <span style={{ background: '#e2e8f0', padding: '4px 12px', borderRadius: '20px', fontSize: '0.85rem', color: '#475569', fontWeight: 'bold' }}>Total: {teachers.length}</span>
           </div>
           <p style={{ fontSize: '0.8rem', color: '#64748b', margin: '0 0 15px 0' }}>
@@ -332,7 +332,7 @@ export default function AdminStaff() {
 
           {teachers.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '40px 0', color: '#94a3b8' }}>
-              <p>Belum ada data pegawai.</p>
+              <p>Belum ada data tenaga pendidik.</p>
             </div>
           ) : (
             <div style={{ display: 'grid', gap: '15px' }}>

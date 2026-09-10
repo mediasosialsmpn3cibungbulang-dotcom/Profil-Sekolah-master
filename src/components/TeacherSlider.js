@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import Image from 'next/image';
 import TeacherProfileModal from '@/components/TeacherProfileModal';
 
-// Slider Guru & Pegawai ala SMAKBO:
+// Slider Guru & Tenaga Pendidik ala SMAKBO:
 // - Tanpa tombol "More", semua data bisa di-slide kanan/kiri
 // - UI kartu (guru-card) tidak diubah sama sekali
 // - Ada dots pagination + auto slide tiap beberapa detik
