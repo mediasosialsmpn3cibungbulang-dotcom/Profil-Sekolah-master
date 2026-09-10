@@ -1,7 +1,12 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.1 (Production — Slider Guru, Popup Profil & Hardening Admin)  
+**Version:** 2.2 (Hapus Halaman Kepala Sekolah)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.2 (Sep 2026):** Halaman publik `/tentang-kami/kepala-sekolah`,
+panel `Kelola Kepala Sekolah`, dan API `/api/kepala-sekolah` dihapus
+(kepala sekolah sudah terwakili di Sambutan Kepala Sekolah); link navbar &
+sidebar dibersihkan.
 
 **Changelog v2.1 (Sep 2026):** Beranda Guru menjadi slider ala SMAKBO (panah, drag,
 dots, auto-slide, tanpa tombol More); klik foto membuka popup profil
@@ -65,9 +70,8 @@ Website profil resmi **SMPN 3 Cibungbulang** dibangun sebagai gerbang informasi 
    - **Sejarah Sekolah (`/tentang-kami/sejarah-sekolah`)**
    - **Profil Sekolah (`/tentang-kami/profil-sekolah`)** (Grid identitas sekolah, NPSN, akreditasi, rombel, dll).
    - **Visi & Misi (`/tentang-kami/visi-misi`)**
-   - **Mars Sekolah (`/tentang-kami/mars-sekolah`)** (Video player sematan YouTube + Lirik Mars).
-   - **Kepala Sekolah (`/tentang-kami/kepala-sekolah`)** (Biografi, riwayat karir, dan pendidikan).
-   - **Kurikulum (`/tentang-kami/kurikulum`)**
+    - **Mars Sekolah (`/tentang-kami/mars-sekolah`)** (Video player sematan YouTube + Lirik Mars).
+    - **Kurikulum (`/tentang-kami/kurikulum`)**
    - **Kesiswaan (`/tentang-kami/kesiswaan`)**
    - **Sarana & Prasarana (`/tentang-kami/sarana-prasarana` & `/tentang-kami/sarana-prasarana/baca/[id]`)**
    - **Struktur Organisasi (`/tentang-kami/struktur-organisasi`)** (Bagan organisasi dengan zoomable lightbox).
@@ -97,7 +101,6 @@ Panel admin memiliki tata letak sidebar responsif dengan navigasi terstruktur
    - **Kelola Profil (`/<path-admin>/profil`)**
    - **Kelola Visi Misi (`/<path-admin>/visi-misi`)**
    - **Kelola Mars (`/<path-admin>/mars`)**
-   - **Kelola Kepala Sekolah (`/<path-admin>/kepala-sekolah`)**
    - **Kelola Kurikulum (`/<path-admin>/kurikulum`)**
    - **Kelola Kesiswaan (`/<path-admin>/kesiswaan`)**
    - **Kelola Sarana Prasarana (`/<path-admin>/sarana` & `/<path-admin>/sarana/form`)**

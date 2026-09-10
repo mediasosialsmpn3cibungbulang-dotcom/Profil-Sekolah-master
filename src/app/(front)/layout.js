@@ -30,7 +30,6 @@ export default function FrontLayout({ children }) {
                 <li><a href="/tentang-kami/profil-sekolah" className="dropdown-item">Profil Sekolah</a></li>
                 <li><a href="/tentang-kami/visi-misi" className="dropdown-item">Visi Misi Sekolah</a></li>
                 <li><a href="/tentang-kami/mars-sekolah" className="dropdown-item">Mars Sekolah</a></li>
-                <li><a href="/tentang-kami/kepala-sekolah" className="dropdown-item">Kepala Sekolah</a></li>
 
                 <li><a href="/tentang-kami/kurikulum" className="dropdown-item">Kurikulum</a></li>
                 <li><a href="/tentang-kami/kesiswaan" className="dropdown-item">Kesiswaan</a></li>
