@@ -1,7 +1,12 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.4 (SDM = Kembaran Homepage)  
+**Version:** 2.5 (Sosmed Guru & Pegawai)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.5 (Sep 2026):** Field baru `Teacher.instagram/tiktok/email`;
+form Kelola Guru & Kelola Pegawai ada isian Media Sosial (opsional, terima
+username atau link); popup profil menampilkan ikon hitam elegan (IG, TikTok,
+email) yang bisa diklik bila datanya diisi.
 
 **Changelog v2.4 (Sep 2026):** Halaman Sumber Daya Manusia disamakan persis
 dengan beranda (2 slider Guru + Pegawai: panah, drag, dots, auto-slide,

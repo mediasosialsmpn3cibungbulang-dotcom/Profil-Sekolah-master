@@ -5,8 +5,63 @@ import { createPortal } from 'react-dom';
 
 // Popup profil guru/pegawai: foto full utuh di kiri, info di kanan.
 // Dipakai di slider homepage DAN di halaman Sumber Daya Manusia.
-// Data (name, subject, additionalRole, description, photoUrl) sudah
-// tersedia dari query, jadi tidak perlu fetch lagi.
+// Data (name, subject, additionalRole, description, photoUrl,
+// instagram, tiktok, email) sudah tersedia dari query,
+// jadi tidak perlu fetch lagi.
+
+// Ubah isian bebas admin (username / link / email) menjadi URL valid.
+function toSocialUrl(value, base) {
+  if (!value) return null;
+  let v = String(value).trim();
+  if (!v) return null;
+  v = v.replace(/^@+/, ''); // buang @ di depan username
+  if (/^https?:\/\//i.test(v)) return v;
+  if (/^[\w.-]+@[\w.-]+\.\w+$/.test(v)) return v; // sudah format email
+  if (v.includes('.') || v.includes('/')) return `https://${v}`;
+  return `${base}${v}`;
+}
+
+const ICON_SIZE = 24;
+const iconProps = {
+  width: ICON_SIZE,
+  height: ICON_SIZE,
+  viewBox: '0 0 24 24',
+  fill: 'none',
+  stroke: '#111111',
+  strokeWidth: 2,
+  strokeLinecap: 'round',
+  strokeLinejoin: 'round',
+  'aria-hidden': true,
+};
+
+function InstagramIcon() {
+  return (
+    <svg {...iconProps}>
+      <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" />
+      <circle cx="12" cy="12" r="4.2" />
+      <circle cx="17.4" cy="6.6" r="1.3" fill="#111111" stroke="none" />
+    </svg>
+  );
+}
+
+function TiktokIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="8" cy="18" r="3.6" />
+      <path d="M11.6 18V4" />
+      <path d="M11.6 4.5c.8 2.6 2.8 4.4 5.9 4.7" />
+    </svg>
+  );
+}
+
+function EmailIcon() {
+  return (
+    <svg {...iconProps}>
+      <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" />
+      <path d="M3.5 7.5 12 13l8.5-5.5" />
+    </svg>
+  );
+}
 export default function TeacherProfileModal({ teacher, onClose }) {
   const [mounted, setMounted] = useState(false); // untuk portal (hindari error SSR)
 
@@ -76,6 +131,31 @@ export default function TeacherProfileModal({ teacher, onClose }) {
                   }}
                 />
               )}
+              {(() => {
+                const links = [
+                  { href: toSocialUrl(teacher.instagram, 'https://instagram.com/'), label: `Instagram ${teacher.name}`, Icon: InstagramIcon },
+                  { href: toSocialUrl(teacher.tiktok, 'https://tiktok.com/@'), label: `TikTok ${teacher.name}`, Icon: TiktokIcon },
+                  { href: teacher.email && teacher.email.includes('@') ? `mailto:${teacher.email.trim()}` : null, label: `Email ${teacher.name}`, Icon: EmailIcon },
+                ].filter((l) => l.href);
+                if (links.length === 0) return null;
+                return (
+                  <div className="teacher-modal-socials">
+                    {links.map(({ href, label, Icon }) => (
+                      <a
+                        key={label}
+                        href={href}
+                        target={href.startsWith('mailto:') ? undefined : '_blank'}
+                        rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                        aria-label={label}
+                        title={label}
+                        className="teacher-modal-social-link"
+                      >
+                        <Icon />
+                      </a>
+                    ))}
+                  </div>
+                );
+              })()}
             </div>
           </div>
         </div>,
@@ -188,6 +268,27 @@ export default function TeacherProfileModal({ teacher, onClose }) {
         }
         .teacher-modal-bio p {
           margin: 0 0 8px 0;
+        }
+        .teacher-modal-socials {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 16px;
+          margin-top: 14px;
+        }
+        .teacher-modal-social-link {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          border: 1.5px solid #111111;
+          transition: transform 0.2s ease, background 0.2s ease;
+        }
+        .teacher-modal-social-link:hover {
+          transform: translateY(-2px);
+          background: #f1f5f9;
         }
         /* Layar kecil (HP): kembali menumpuk ke bawah */
         @media (max-width: 640px) {

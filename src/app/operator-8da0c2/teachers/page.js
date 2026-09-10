@@ -12,6 +12,9 @@ export default function AdminTeachers() {
   const [subject, setSubject] = useState('Guru Kelas');
   const [description, setDescription] = useState('');
   const [additionalRole, setAdditionalRole] = useState('');
+  const [instagram, setInstagram] = useState('');
+  const [tiktok, setTiktok] = useState('');
+  const [email, setEmail] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [editingId, setEditingId] = useState(null);
   const [existingImageUrl, setExistingImageUrl] = useState('');
@@ -68,7 +71,7 @@ export default function AdminTeachers() {
         }
       }
       
-      const payload = { name, subject, photoUrl: finalImageUrl, description, additionalRole, category: 'GURU' };
+      const payload = { name, subject, photoUrl: finalImageUrl, description, additionalRole, category: 'GURU', instagram, tiktok, email };
       let res;
 
       if (editingId) {
@@ -90,6 +93,9 @@ export default function AdminTeachers() {
         setSubject('Guru Kelas');
         setDescription('');
         setAdditionalRole('');
+        setInstagram('');
+        setTiktok('');
+        setEmail('');
         setImageFile(null);
         setEditingId(null);
         setExistingImageUrl('');
@@ -111,6 +117,9 @@ export default function AdminTeachers() {
     setSubject(t.subject || 'Guru Kelas');
     setDescription(t.description || '');
     setAdditionalRole(t.additionalRole || '');
+    setInstagram(t.instagram || '');
+    setTiktok(t.tiktok || '');
+    setEmail(t.email || '');
     setEditingId(t.id);
     setExistingImageUrl(t.photoUrl || '');
     setImageFile(null);
@@ -122,6 +131,9 @@ export default function AdminTeachers() {
     setSubject('Guru Kelas');
     setDescription('');
     setAdditionalRole('');
+    setInstagram('');
+    setTiktok('');
+    setEmail('');
     setEditingId(null);
     setExistingImageUrl('');
     setImageFile(null);
@@ -230,6 +242,32 @@ export default function AdminTeachers() {
                 placeholder="Misal: Wali Kelas / Pembina Ekstrakurikuler"
                 style={{ width: '100%', padding: '12px', border: '1px solid #cbd5e1', borderRadius: '6px', outline: 'none' }}
               />
+            </div>
+
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', marginBottom: '8px', color: '#475569', fontWeight: 'bold' }}>Media Sosial (Opsional)</label>
+              <input 
+                type="text" 
+                value={instagram} 
+                onChange={e => setInstagram(e.target.value)} 
+                placeholder="Instagram: username atau link (misal: smpn3cibungbulang)"
+                style={{ width: '100%', padding: '12px', border: '1px solid #cbd5e1', borderRadius: '6px', outline: 'none', marginBottom: '10px' }}
+              />
+              <input 
+                type="text" 
+                value={tiktok} 
+                onChange={e => setTiktok(e.target.value)} 
+                placeholder="TikTok: username atau link (misal: @smpn3cibungbulang)"
+                style={{ width: '100%', padding: '12px', border: '1px solid #cbd5e1', borderRadius: '6px', outline: 'none', marginBottom: '10px' }}
+              />
+              <input 
+                type="text" 
+                value={email} 
+                onChange={e => setEmail(e.target.value)} 
+                placeholder="Email (misal: nama@email.com)"
+                style={{ width: '100%', padding: '12px', border: '1px solid #cbd5e1', borderRadius: '6px', outline: 'none' }}
+              />
+              <small style={{ color: '#64748b', display: 'block', marginTop: '5px' }}>*Kosongkan bila tidak ada. Ikon sosmed muncul di popup profil.</small>
             </div>
 
             <div style={{ marginBottom: '25px' }}>
