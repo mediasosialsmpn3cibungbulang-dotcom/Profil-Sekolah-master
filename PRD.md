@@ -1,7 +1,10 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.9 (Favicon Resmi)  
+**Version:** 2.10 (Judul Homepage Pendek)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.10 (Sep 2026):** Judul homepage (dan OG/Twitter) dipendekkan
+menjadi "SMPN 3 Cibungbulang" agar tampil rapi di hasil Google.
 
 **Changelog v2.9 (Sep 2026):** Favicon resmi dari logo sekolah
 (`favicon.ico` multi-resolusi 16/32/48 + `apple-touch-icon.png`) agar ikon

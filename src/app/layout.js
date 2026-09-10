@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'], display: 'swap' });
 export const metadata = {
   metadataBase: new URL('https://smpn3-cibungbulang.sch.id'),
   title: {
-    default: 'SMPN 3 Cibungbulang — Website Resmi Sekolah',
+    default: 'SMPN 3 Cibungbulang',
     template: '%s | SMPN 3 Cibungbulang',
   },
   description:
@@ -35,14 +35,14 @@ export const metadata = {
     locale: 'id_ID',
     url: 'https://smpn3-cibungbulang.sch.id',
     siteName: 'SMPN 3 Cibungbulang',
-    title: 'SMPN 3 Cibungbulang — Website Resmi Sekolah',
+    title: 'SMPN 3 Cibungbulang',
     description:
       'Profil, guru dan tenaga pendidik, prestasi, ekstrakurikuler, berita dan kegiatan SMP Negeri 3 Cibungbulang.',
     images: [{ url: '/images/Logo.png', width: 512, height: 512, alt: 'Logo SMPN 3 Cibungbulang' }],
   },
   twitter: {
     card: 'summary',
-    title: 'SMPN 3 Cibungbulang — Website Resmi Sekolah',
+    title: 'SMPN 3 Cibungbulang',
     description: 'Profil, prestasi, ekstrakurikuler, berita dan kegiatan SMP Negeri 3 Cibungbulang.',
   },
   robots: {
