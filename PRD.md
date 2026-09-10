@@ -1,7 +1,11 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.11 (Breadcrumb SEO)  
+**Version:** 2.12 (Responsif Mobile)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.12 (Sep 2026):** Perbaikan mobile — tombol hamburger yang
+mati dihidupkan kembali (menu navigasi HP kini bisa dibuka); sidebar & form admin
+menumpuk rapi di layar kecil; seluruh judul halaman mengecil otomatis di HP.
 
 **Changelog v2.11 (Sep 2026):** Breadcrumb terstruktur (schema.org
 BreadcrumbList) di 4 halaman kunci (Prestasi, Ekskul, SDM, Visi Misi) untuk

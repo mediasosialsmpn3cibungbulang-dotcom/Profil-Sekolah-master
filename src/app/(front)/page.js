@@ -48,7 +48,7 @@ export default async function Home() {
 
       <ScrollAnimation animation="fade-up">
         <div style={{ textAlign: 'center', marginTop: '40px', marginBottom: '60px' }}>
-          <h1 style={{ fontSize: '2.5rem', color: '#1e293b', letterSpacing: '-0.05em', marginBottom: '15px' }}>Selamat Datang di SMPN 3 Cibungbulang</h1>
+          <h1 className="welcome-title" style={{ fontSize: '2.5rem', color: '#1e293b', letterSpacing: '-0.05em', marginBottom: '15px' }}>Selamat Datang di SMPN 3 Cibungbulang</h1>
           <p style={{ fontSize: '1.1rem', color: '#64748b', maxWidth: '800px', margin: '0 auto', lineHeight: '1.6' }}>
             Melalui website ini kami berharap dapat memberikan pelayanan informasi yang lebih baik dan cepat kepada seluruh warga sekolah dan masyarakat pada umumnya.
           </p>

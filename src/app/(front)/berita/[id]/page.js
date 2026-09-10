@@ -43,7 +43,7 @@ export default async function BeritaDetail({ params }) {
         borderBottom: '4px solid #ffb703'
       }}>
         <div className="container" style={{ position: 'relative', zIndex: '2' }}>
-          <h1 style={{ color: 'white', fontSize: '2.5rem', fontWeight: 'bold', textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>
+          <h1 className="detail-hero-title" style={{ color: 'white', fontSize: '2.5rem', fontWeight: 'bold', textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>
             Berita dan Kegiatan Sekolah
           </h1>
         </div>
@@ -60,7 +60,7 @@ export default async function BeritaDetail({ params }) {
           <h2 style={{ fontSize: '1.2rem', color: '#64748b', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '1px' }}>
             Berita & Kegiatan Sekolah
           </h2>
-          <h1 style={{ fontSize: '2.2rem', color: '#1e3a8a', marginBottom: '20px', lineHeight: '1.3' }}>
+          <h1 className="detail-content-title" style={{ fontSize: '2.2rem', color: '#1e3a8a', marginBottom: '20px', lineHeight: '1.3' }}>
             {post.title}
           </h1>
           

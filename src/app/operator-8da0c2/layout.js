@@ -25,10 +25,10 @@ export default function AdminLayout({ children }) {
   };
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', fontFamily: 'var(--font-family)', background: '#f8fafc' }}>
+    <div className="admin-shell" style={{ display: 'flex', minHeight: '100vh', fontFamily: 'var(--font-family)', background: '#f8fafc' }}>
       
       {/* Sidebar */}
-      <aside style={{ width: '260px', background: '#0f172a', color: 'white', display: 'flex', flexDirection: 'column' }}>
+      <aside className="admin-sidebar" style={{ width: '260px', background: '#0f172a', color: 'white', display: 'flex', flexDirection: 'column' }}>
         <div style={{ padding: '30px 20px', borderBottom: '1px solid #1e293b' }}>
           <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#f8fafc', margin: 0 }}>
             SMPN 3 Cibungbulang
@@ -274,7 +274,7 @@ export default function AdminLayout({ children }) {
       </aside>
       
       {/* Main Content */}
-      <main style={{ flex: 1, padding: '40px', overflowY: 'auto' }}>
+      <main className="admin-main" style={{ flex: 1, padding: '40px', overflowY: 'auto' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           {children}
         </div>

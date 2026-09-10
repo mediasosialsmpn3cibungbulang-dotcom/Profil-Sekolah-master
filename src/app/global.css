@@ -54,7 +54,7 @@ body {
 }
 
 .nav-toggle, .nav-toggle-label {
-  display: none !important;
+  display: none;
 }
 
 .zoomable-image {
@@ -502,6 +502,24 @@ body {
   footer iframe { height: 200px; }
   .prestasi-card, .news-card { margin: 0 auto; width: 100%; }
   h1, h2, h3 { line-height: 1.3 !important; }
+
+  /* Judul & halaman detail di HP */
+  main h1 { font-size: 1.7rem !important; }
+  main h2 { font-size: 1.35rem !important; }
+  .section-title { font-size: 1.6rem !important; margin-bottom: 25px !important; }
+  .welcome-title { font-size: 1.7rem !important; }
+  .page-header-sdm h2 { font-size: 1.8rem !important; }
+  .page-header-sdm p { font-size: 0.95rem !important; }
+  .sdm-detail-grid { padding: 20px !important; gap: 20px !important; }
+  .sdm-detail-grid h2 { font-size: 1.6rem !important; }
+  .detail-hero-title { font-size: 1.6rem !important; }
+  .detail-content-title { font-size: 1.4rem !important; }
+
+  /* Admin di HP: sidebar menumpuk di atas, form 1 kolom */
+  .admin-shell { flex-direction: column !important; }
+  .admin-sidebar { width: 100% !important; }
+  .admin-main { padding: 20px 15px !important; }
+  .admin-form-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
 }
 
 @media (max-width: 480px) {
