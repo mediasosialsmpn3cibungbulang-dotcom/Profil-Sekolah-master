@@ -1,7 +1,11 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.3 (Split Guru & Pegawai)  
+**Version:** 2.4 (SDM = Kembaran Homepage)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.4 (Sep 2026):** Halaman Sumber Daya Manusia disamakan persis
+dengan beranda (2 slider Guru + Pegawai: panah, drag, dots, auto-slide,
+popup profil); komponen `SdmGrid` yang tak terpakai dihapus.
 
 **Changelog v2.3 (Sep 2026):** Data SDM dipisah kategori `GURU`/`PEGAWAI`
 (field baru `Teacher.category`); beranda kini punya 2 slider
@@ -84,7 +88,10 @@ Website profil resmi **SMPN 3 Cibungbulang** dibangun sebagai gerbang informasi 
    - **Kesiswaan (`/tentang-kami/kesiswaan`)**
    - **Sarana & Prasarana (`/tentang-kami/sarana-prasarana` & `/tentang-kami/sarana-prasarana/baca/[id]`)**
    - **Struktur Organisasi (`/tentang-kami/struktur-organisasi`)** (Bagan organisasi dengan zoomable lightbox).
-    - **Sumber Daya Manusia (`/tentang-kami/sumber-daya-manusia`)**: Grid foto guru/pegawai; klik foto membuka **popup profil yang sama dengan beranda** (foto utuh + info kanan). Rute detail `.../sumber-daya-manusia/baca/[id]` sudah **dihapus**.
+    - **Sumber Daya Manusia (`/tentang-kami/sumber-daya-manusia`)**: Kembaran
+      beranda — 2 slider **Guru** + **Pegawai** (panah, drag, dots, auto-slide,
+      popup profil). Rute detail `.../sumber-daya-manusia/baca/[id]` sudah
+      **dihapus**.
     - **Direktori SDM alternatif (`/sdm` & `/sdm/lihat/[id]/[slug]`)**: Grid + halaman detail profil (tetap dipertahankan).
 3. **Prestasi Siswa (`/prestasi` & `/prestasi/[id]`)**: Katalog pencapaian lomba siswa dengan detail liputan dan foto.
 4. **Ekstrakurikuler (`/ekskul` & `/ekskul/[id]`)**: Direktori kegiatan ekskul lengkap dengan nama pembina, jadwal, dan galeri kegiatan.

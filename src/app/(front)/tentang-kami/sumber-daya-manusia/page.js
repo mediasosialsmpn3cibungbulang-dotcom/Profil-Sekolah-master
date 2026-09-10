@@ -1,10 +1,16 @@
 import { prisma } from '@/lib/prisma';
-import SdmGrid from '@/components/SdmGrid';
+import TeacherSlider from '@/components/TeacherSlider';
 
 export const revalidate = 60;
 
 export default async function Page() {
   const teachers = await prisma.teacher.findMany({
+    where: { category: 'GURU' },
+    orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
+  });
+
+  const staff = await prisma.teacher.findMany({
+    where: { category: 'PEGAWAI' },
     orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
   });
 
@@ -65,8 +71,14 @@ export default async function Page() {
         </div>
       </div>
 
+      <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 15px', marginBottom: '20px' }}>
+        <h2 className="section-title" style={{ color: '#1e293b' }}>Guru</h2>
+        <TeacherSlider teachers={teachers} autoPlayInterval={3000} />
+      </div>
+
       <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 15px', marginBottom: '80px' }}>
-        <SdmGrid teachers={teachers} />
+        <h2 className="section-title" style={{ color: '#1e293b' }}>Pegawai</h2>
+        <TeacherSlider teachers={staff} autoPlayInterval={3000} />
       </div>
     </>
   );
