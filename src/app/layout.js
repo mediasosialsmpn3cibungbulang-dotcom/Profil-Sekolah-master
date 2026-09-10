@@ -24,8 +24,11 @@ export const metadata = {
   authors: [{ name: 'SMPN 3 Cibungbulang' }],
   creator: 'SMPN 3 Cibungbulang',
   icons: {
-    icon: '/images/Logo.png',
-    apple: '/images/Logo.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/images/Logo.png', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
   },
   openGraph: {
     type: 'website',
