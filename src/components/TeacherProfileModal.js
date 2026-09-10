@@ -136,23 +136,33 @@ export default function TeacherProfileModal({ teacher, onClose }) {
                   { href: toSocialUrl(teacher.instagram, 'https://instagram.com/'), label: `Instagram ${teacher.name}`, Icon: InstagramIcon },
                   { href: toSocialUrl(teacher.tiktok, 'https://tiktok.com/@'), label: `TikTok ${teacher.name}`, Icon: TiktokIcon },
                   { href: teacher.email && teacher.email.includes('@') ? `mailto:${teacher.email.trim()}` : null, label: `Email ${teacher.name}`, Icon: EmailIcon },
-                ].filter((l) => l.href);
-                if (links.length === 0) return null;
+                ];
                 return (
                   <div className="teacher-modal-socials">
-                    {links.map(({ href, label, Icon }) => (
-                      <a
-                        key={label}
-                        href={href}
-                        target={href.startsWith('mailto:') ? undefined : '_blank'}
-                        rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                        aria-label={label}
-                        title={label}
-                        className="teacher-modal-social-link"
-                      >
-                        <Icon />
-                      </a>
-                    ))}
+                    {links.map(({ href, label, Icon }) =>
+                      href ? (
+                        <a
+                          key={label}
+                          href={href}
+                          target={href.startsWith('mailto:') ? undefined : '_blank'}
+                          rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                          aria-label={label}
+                          title={label}
+                          className="teacher-modal-social-link"
+                        >
+                          <Icon />
+                        </a>
+                      ) : (
+                        <span
+                          key={label}
+                          aria-label={label}
+                          title={`${label} (belum diisi)`}
+                          className="teacher-modal-social-link is-off"
+                        >
+                          <Icon />
+                        </span>
+                      )
+                    )}
                   </div>
                 );
               })()}
@@ -289,6 +299,14 @@ export default function TeacherProfileModal({ teacher, onClose }) {
         .teacher-modal-social-link:hover {
           transform: translateY(-2px);
           background: #f1f5f9;
+        }
+        .teacher-modal-social-link.is-off {
+          opacity: 0.3;
+          cursor: default;
+        }
+        .teacher-modal-social-link.is-off:hover {
+          transform: none;
+          background: transparent;
         }
         /* Layar kecil (HP): kembali menumpuk ke bawah */
         @media (max-width: 640px) {

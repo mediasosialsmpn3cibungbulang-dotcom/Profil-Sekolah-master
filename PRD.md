@@ -1,7 +1,10 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.5 (Sosmed Guru & Pegawai)  
+**Version:** 2.6 (Ikon Sosmed Selalu Tampil)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.6 (Sep 2026):** Ikon sosmed di popup profil selalu tampil
+ber tiga; yang belum diisi link-nya tampil redup dan tidak bisa diklik.
 
 **Changelog v2.5 (Sep 2026):** Field baru `Teacher.instagram/tiktok/email`;
 form Kelola Guru & Kelola Pegawai ada isian Media Sosial (opsional, terima
