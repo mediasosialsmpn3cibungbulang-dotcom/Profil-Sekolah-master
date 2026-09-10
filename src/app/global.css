@@ -508,8 +508,9 @@ body {
   main h2 { font-size: 1.35rem !important; }
   .section-title { font-size: 1.6rem !important; margin-bottom: 25px !important; }
   .welcome-title { font-size: 1.7rem !important; }
-  .page-header-sdm h2 { font-size: 1.8rem !important; }
-  .page-header-sdm p { font-size: 0.95rem !important; }
+  .page-header-sdm { height: auto !important; min-height: 140px; padding: 28px 15px !important; }
+  .page-header-sdm h2 { font-size: 1.5rem !important; line-height: 1.35 !important; }
+  .page-header-sdm p { font-size: 0.9rem !important; margin-top: 8px !important; }
   .sdm-detail-grid { padding: 20px !important; gap: 20px !important; }
   .sdm-detail-grid h2 { font-size: 1.6rem !important; }
   .detail-hero-title { font-size: 1.6rem !important; }
