@@ -8,6 +8,10 @@ import Image from 'next/image';
 
 export const revalidate = 60; // Disable cache for demo purposes so admin changes show immediately
 
+export const metadata = {
+  alternates: { canonical: 'https://smpn3-cibungbulang.sch.id/' },
+};
+
 export default async function Home() {
   const posts = await prisma.post.findMany({
     orderBy: { createdAt: 'desc' },

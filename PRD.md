@@ -1,7 +1,10 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.15 (Fix Toggle Dropdown HP)  
+**Version:** 2.16 (Canonical Homepage)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.16 (Sep 2026):** Tambah canonical homepage ke versi HTTPS
+agar duplikat http/https di hasil Google menggabung menjadi satu.
 
 **Changelog v2.15 (Sep 2026):** Lanjutan v2.14 — hover dropdown dimatikan
 total di HP karena hover sentuh itu lengket (menu tidak mau menutup);
