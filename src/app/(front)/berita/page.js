@@ -4,6 +4,13 @@ import Image from 'next/image';
 
 export const revalidate = 60;
 
+export const metadata = {
+  title: 'Berita & Kegiatan',
+  description:
+    'Berita dan kegiatan terbaru SMP Negeri 3 Cibungbulang — informasi sekolah untuk siswa, orang tua, dan masyarakat.',
+  alternates: { canonical: 'https://smpn3-cibungbulang.sch.id/berita' },
+};
+
 export default async function Page() {
   const posts = await prisma.post.findMany({
     orderBy: { createdAt: 'desc' }

@@ -3,6 +3,13 @@ import TeacherSlider from '@/components/TeacherSlider';
 
 export const revalidate = 60;
 
+export const metadata = {
+  title: 'Guru dan Tenaga Pendidik',
+  description:
+    'Direktori guru dan tenaga pendidik SMP Negeri 3 Cibungbulang — pendidik dan tenaga kependidikan berdedikasi.',
+  alternates: { canonical: 'https://smpn3-cibungbulang.sch.id/tentang-kami/sumber-daya-manusia' },
+};
+
 export default async function Page() {
   const teachers = await prisma.teacher.findMany({
     where: { category: 'GURU' },

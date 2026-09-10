@@ -3,6 +3,13 @@ import Image from 'next/image';
 
 export const revalidate = 60; // Disable cache for demo purposes
 
+export const metadata = {
+  title: 'Visi dan Misi',
+  description:
+    'Visi dan misi SMP Negeri 3 Cibungbulang — arah dan tujuan pendidikan sekolah.',
+  alternates: { canonical: 'https://smpn3-cibungbulang.sch.id/tentang-kami/visi-misi' },
+};
+
 export default async function Page() {
   const visimisi = await prisma.visiMisi.findFirst();
 

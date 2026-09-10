@@ -4,6 +4,13 @@ import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
 
+export const metadata = {
+  title: 'Ekstrakurikuler',
+  description:
+    'Direktori kegiatan ekstrakurikuler SMP Negeri 3 Cibungbulang — pembina, jadwal, dan galeri kegiatan.',
+  alternates: { canonical: 'https://smpn3-cibungbulang.sch.id/ekskul' },
+};
+
 export default async function Page() {
   const ekskuls = await prisma.ekskul.findMany({
     orderBy: { createdAt: 'desc' }

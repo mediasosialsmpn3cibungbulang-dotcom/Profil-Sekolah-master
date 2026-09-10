@@ -1,7 +1,14 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.7 (Pegawai → Tenaga Pendidik)  
+**Version:** 2.8 (Fondasi SEO)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.8 (Sep 2026):** Fondasi SEO — metadata global (title template,
+deskripsi, keywords, OpenGraph, canonical), metadata per halaman
+(Prestasi, Ekskul, Berita, SDM, Visi Misi), `sitemap.xml` dinamis (rute
+statis + ID berita/prestasi/ekskul/guru/sarana), `robots.txt`, dan
+JSON-LD schema.org `School`. Langkah lanjutan (di luar kode): daftarkan
+domain di Google Search Console + submit sitemap.
 
 **Changelog v2.7 (Sep 2026):** Seluruh tulisan "Pegawai" di semua halaman diganti menjadi "Tenaga Pendidik" (homepage, SDM, profil, panel admin). Nilai kategori data (GURU/PEGAWAI) tidak berubah.
 

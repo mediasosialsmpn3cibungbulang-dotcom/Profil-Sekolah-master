@@ -5,6 +5,13 @@ import ScrollAnimation from '@/components/ScrollAnimation';
 
 export const revalidate = 60; // Disable cache for demo purposes
 
+export const metadata = {
+  title: 'Prestasi Siswa',
+  description:
+    'Katalog prestasi siswa SMP Negeri 3 Cibungbulang — pencapaian lomba akademik dan non-akademik terbaru.',
+  alternates: { canonical: 'https://smpn3-cibungbulang.sch.id/prestasi' },
+};
+
 export default async function Page() {
   const achievements = await prisma.achievement.findMany({
     orderBy: { createdAt: 'desc' }
