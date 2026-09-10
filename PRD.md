@@ -1,7 +1,12 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.2 (Hapus Halaman Kepala Sekolah)  
+**Version:** 2.3 (Split Guru & Pegawai)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.3 (Sep 2026):** Data SDM dipisah kategori `GURU`/`PEGAWAI`
+(field baru `Teacher.category`); beranda kini punya 2 slider
+(**Guru** 29 orang + **Pegawai** 7 orang); panel admin dipecah menjadi
+**Kelola Guru** dan **Kelola Pegawai** (API dukung filter `?category=`).
 
 **Changelog v2.2 (Sep 2026):** Halaman publik `/tentang-kami/kepala-sekolah`,
 panel `Kelola Kepala Sekolah`, dan API `/api/kepala-sekolah` dihapus
@@ -62,7 +67,11 @@ Website profil resmi **SMPN 3 Cibungbulang** dibangun sebagai gerbang informasi 
    - Dynamic Hero Banner Slider (mengambil data dari CMS).
    - Sambutan Singkat Kepala Sekolah & Profil Utama.
    - Papan Prestasi Siswa Terkini.
-   - **Guru & Pegawai: slider interaktif** (panah, tahan-seret/drag, dots, auto-slide tiap 3 detik); klik foto membuka **popup profil** (foto utuh + nama, jabatan/mapel, jabatan tambahan, biografi), tanpa tombol More.
+   - **Guru & Pegawai: 2 slider terpisah** — section **Guru** dan section
+     **Pegawai** (masing-masing: panah, tahan-seret/drag, dots, auto-slide
+     tiap 3 detik); klik foto membuka **popup profil** (foto utuh + nama,
+     jabatan/mapel, jabatan tambahan, biografi), tanpa tombol More.
+     Kategori tersimpan di field `Teacher.category` (`GURU`/`PEGAWAI`).
    - Slider Berita & Kegiatan Sekolah Terbaru.
    - Footer informatif dengan integrasi Google Maps, jam kerja, kontak, dan tautan media sosial.
 2. **Tentang Kami**:
@@ -93,7 +102,8 @@ Panel admin memiliki tata letak sidebar responsif dengan navigasi terstruktur
    - **Kelola Banner Slider (`/<path-admin>/sliders`)**: Tambah/ubah foto banner beranda beserta urutan tampilnya.
    - **Kelola Berita (`/<path-admin>/posts`)**: Editor CRUD berita lengkap dengan Rich Text dan upload gambar.
    - **Kelola Prestasi (`/<path-admin>/achievements`)**: Manajemen prestasi siswa (kategori, nama siswa, tingkat kejuaraan).
-   - **Kelola Data Guru (`/<path-admin>/teachers`)**: Manajemen data tenaga pendidik dan kependidikan.
+   - **Kelola Data Guru (`/<path-admin>/teachers`)**: Manajemen tenaga pendidik (kategori `GURU`).
+   - **Kelola Data Pegawai (`/<path-admin>/staff`)**: Manajemen tenaga kependidikan/TU/operator (kategori `PEGAWAI`).
    - **Kelola Ekstrakurikuler (`/<path-admin>/ekskul`)**: Manajemen kegiatan ekskul dan jadwal.
    - **Kelola Sambutan (`/<path-admin>/sambutan`)**: Pengaturan foto dan sambutan Kepala Sekolah.
 3. **Kelola Menu Tentang Kami**:

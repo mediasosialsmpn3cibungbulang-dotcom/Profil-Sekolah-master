@@ -27,6 +27,12 @@ export default async function Home() {
   const sambutan = await prisma.sambutan.findFirst();
 
   const teachers = await prisma.teacher.findMany({
+    where: { category: 'GURU' },
+    orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
+  });
+
+  const staff = await prisma.teacher.findMany({
+    where: { category: 'PEGAWAI' },
     orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
   });
 
@@ -98,14 +104,25 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Guru dan Pegawai - Slider ala SMAKBO (tanpa tombol More) */}
+      {/* Guru - Slider */}
       <section style={{ borderTop: '1px solid #f1f5f9', paddingTop: '60px' }}>
         <ScrollAnimation animation="fade-up">
-          <h2 className="section-title" style={{ color: '#1e293b' }}>Guru dan Pegawai</h2>
+          <h2 className="section-title" style={{ color: '#1e293b' }}>Guru</h2>
         </ScrollAnimation>
         
         <ScrollAnimation animation="fade-in" delay={150}>
           <TeacherSlider teachers={teachers} autoPlayInterval={3000} />
+        </ScrollAnimation>
+      </section>
+
+      {/* Pegawai - Slider */}
+      <section style={{ borderTop: '1px solid #f1f5f9', paddingTop: '60px' }}>
+        <ScrollAnimation animation="fade-up">
+          <h2 className="section-title" style={{ color: '#1e293b' }}>Pegawai</h2>
+        </ScrollAnimation>
+        
+        <ScrollAnimation animation="fade-in" delay={150}>
+          <TeacherSlider teachers={staff} autoPlayInterval={3000} />
         </ScrollAnimation>
       </section>
 

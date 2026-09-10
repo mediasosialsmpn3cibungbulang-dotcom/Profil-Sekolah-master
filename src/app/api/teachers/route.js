@@ -4,9 +4,13 @@ import { prisma } from '@/lib/prisma';
 export const dynamic = 'force-dynamic';
 import { cookies } from 'next/headers';
 
-export async function GET() {
+export async function GET(request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const category = searchParams.get('category'); // GURU | PEGAWAI | null = semua
+    const where = category === 'GURU' || category === 'PEGAWAI' ? { category } : {};
     const teachers = await prisma.teacher.findMany({
+      where,
       orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }]
     });
     return NextResponse.json(teachers);
@@ -20,11 +24,11 @@ export async function POST(request) {
   try {
     
 
-    const { name, subject, photoUrl, description, education, experience, additionalRole } = await request.json();
+    const { name, subject, photoUrl, description, education, experience, additionalRole, category } = await request.json();
     // Guru baru selalu di urutan paling bawah
     const last = await prisma.teacher.findFirst({ orderBy: { sortOrder: 'desc' } });
     const newTeacher = await prisma.teacher.create({
-      data: { name, subject, photoUrl, description, education, experience, additionalRole, sortOrder: (last?.sortOrder ?? 0) + 1 }
+      data: { name, subject, photoUrl, description, education, experience, additionalRole, category: category === 'PEGAWAI' ? 'PEGAWAI' : 'GURU', sortOrder: (last?.sortOrder ?? 0) + 1 }
     });
     return NextResponse.json(newTeacher);
   } catch (error) {

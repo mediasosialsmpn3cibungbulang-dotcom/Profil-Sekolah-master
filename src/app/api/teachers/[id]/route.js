@@ -10,10 +10,12 @@ export async function PUT(request, { params }) {
   if (!await isAuthenticated()) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   try {
     const { id } = await params;
-    const { name, subject, photoUrl, description, education, experience, additionalRole } = await request.json();
+    const { name, subject, photoUrl, description, education, experience, additionalRole, category } = await request.json();
+    const data = { name, subject, photoUrl, description, education, experience, additionalRole };
+    if (category === 'GURU' || category === 'PEGAWAI') data.category = category;
     const updated = await prisma.teacher.update({
       where: { id },
-      data: { name, subject, photoUrl, description, education, experience, additionalRole }
+      data
     });
     return NextResponse.json(updated);
   } catch (error) {

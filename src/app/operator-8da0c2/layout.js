@@ -7,7 +7,7 @@ export default function AdminLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
 
-  const isContentActive = ['/operator-8da0c2/posts', '/operator-8da0c2/achievements', '/operator-8da0c2/teachers', '/operator-8da0c2/sliders', '/operator-8da0c2/sambutan', '/operator-8da0c2/ekskul'].includes(pathname);
+  const isContentActive = ['/operator-8da0c2/posts', '/operator-8da0c2/achievements', '/operator-8da0c2/teachers', '/operator-8da0c2/staff', '/operator-8da0c2/sliders', '/operator-8da0c2/sambutan', '/operator-8da0c2/ekskul'].includes(pathname);
   const [isContentMenuOpen, setIsContentMenuOpen] = useState(isContentActive);
 
   const isTentangKamiActive = ['/operator-8da0c2/sejarah', '/operator-8da0c2/profil', '/operator-8da0c2/visi-misi', '/operator-8da0c2/mars', '/operator-8da0c2/kurikulum', '/operator-8da0c2/kesiswaan', '/operator-8da0c2/sarana', '/operator-8da0c2/struktur-organisasi'].includes(pathname);
@@ -98,6 +98,16 @@ export default function AdminLayout({ children }) {
                       background: pathname === '/operator-8da0c2/teachers' ? '#1e293b' : 'transparent'
                     }}>
                       Kelola Guru
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/operator-8da0c2/staff" style={{ 
+                      display: 'block', padding: '10px 15px 10px 30px', color: pathname === '/operator-8da0c2/staff' ? 'white' : '#94a3b8',
+                      textDecoration: 'none', transition: 'all 0.2s', fontSize: '0.9rem',
+                      fontWeight: pathname === '/operator-8da0c2/staff' ? 'bold' : 'normal',
+                      background: pathname === '/operator-8da0c2/staff' ? '#1e293b' : 'transparent'
+                    }}>
+                      Kelola Pegawai
                     </a>
                   </li>
                   <li>

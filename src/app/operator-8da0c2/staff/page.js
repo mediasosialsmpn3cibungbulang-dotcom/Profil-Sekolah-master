@@ -4,12 +4,12 @@ import { useState, useEffect, useRef } from 'react';
 import RichTextEditor from "@/components/RichTextEditor";
 import Toast from "@/components/Toast";
 
-export default function AdminTeachers() {
+export default function AdminStaff() {
   const [teachers, setTeachers] = useState([]);
   const [dragIdx, setDragIdx] = useState(null);
   const [savingOrder, setSavingOrder] = useState(false);
   const [name, setName] = useState('');
-  const [subject, setSubject] = useState('Guru Kelas');
+  const [subject, setSubject] = useState('Tata Usaha');
   const [description, setDescription] = useState('');
   const [additionalRole, setAdditionalRole] = useState('');
   const [imageFile, setImageFile] = useState(null);
@@ -24,7 +24,7 @@ export default function AdminTeachers() {
 
   const fetchTeachers = async () => {
     try {
-      const res = await fetch('/api/teachers?category=GURU');
+      const res = await fetch('/api/teachers?category=PEGAWAI');
       const data = await res.json();
       if (Array.isArray(data)) setTeachers(data);
     } catch (err) {
@@ -68,7 +68,7 @@ export default function AdminTeachers() {
         }
       }
       
-      const payload = { name, subject, photoUrl: finalImageUrl, description, additionalRole, category: 'GURU' };
+      const payload = { name, subject, photoUrl: finalImageUrl, description, additionalRole, category: 'PEGAWAI' };
       let res;
 
       if (editingId) {
@@ -87,14 +87,14 @@ export default function AdminTeachers() {
       
       if (res.ok) {
         setName('');
-        setSubject('Guru Kelas');
+        setSubject('Tata Usaha');
         setDescription('');
         setAdditionalRole('');
         setImageFile(null);
         setEditingId(null);
         setExistingImageUrl('');
         if (e.target) e.target.reset(); // Reset file input
-        showNotification(editingId ? 'Data Guru berhasil diperbarui!' : 'Data Guru berhasil ditambahkan!', 'success');
+        showNotification(editingId ? 'Data Pegawai berhasil diperbarui!' : 'Data Pegawai berhasil ditambahkan!', 'success');
         fetchTeachers();
       } else {
         throw new Error('Gagal menyimpan data');
@@ -108,7 +108,7 @@ export default function AdminTeachers() {
 
   const handleEdit = (t) => {
     setName(t.name);
-    setSubject(t.subject || 'Guru Kelas');
+    setSubject(t.subject || 'Tata Usaha');
     setDescription(t.description || '');
     setAdditionalRole(t.additionalRole || '');
     setEditingId(t.id);
@@ -119,7 +119,7 @@ export default function AdminTeachers() {
 
   const handleCancelEdit = () => {
     setName('');
-    setSubject('Guru Kelas');
+    setSubject('Tata Usaha');
     setDescription('');
     setAdditionalRole('');
     setEditingId(null);
@@ -128,7 +128,7 @@ export default function AdminTeachers() {
   };
 
   const handleDelete = async (id) => {
-    if (!confirm('Yakin ingin menghapus data guru ini?')) return;
+    if (!confirm('Yakin ingin menghapus data pegawai ini?')) return;
     
     try {
       const res = await fetch(`/api/teachers/${id}`, { method: 'DELETE' });
@@ -181,13 +181,13 @@ export default function AdminTeachers() {
   return (
     <div>
       <Toast notification={notification} onClose={() => setNotification({ message: '', type: '' })} />
-      <h1 style={{ fontSize: '2rem', color: '#0f172a', marginBottom: '30px', fontWeight: 'bold' }}>Kelola Data Guru</h1>
+      <h1 style={{ fontSize: '2rem', color: '#0f172a', marginBottom: '30px', fontWeight: 'bold' }}>Kelola Data Pegawai</h1>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px' }}>
         
         {/* Form Tambah */}
         <div style={{ background: 'white', padding: '30px', borderRadius: '12px', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', border: '1px solid #e2e8f0', alignSelf: 'start' }}>
-          <h2 style={{ fontSize: '1.2rem', color: '#1e293b', marginBottom: '25px', borderBottom: '1px solid #e2e8f0', paddingBottom: '10px' }}>{editingId ? 'Ubah Data Guru' : 'Tambah Guru Baru'}</h2>
+          <h2 style={{ fontSize: '1.2rem', color: '#1e293b', marginBottom: '25px', borderBottom: '1px solid #e2e8f0', paddingBottom: '10px' }}>{editingId ? 'Ubah Data Pegawai' : 'Tambah Pegawai Baru'}</h2>
           
           <form onSubmit={handleSubmit}>
             <div style={{ marginBottom: '20px' }}>
@@ -202,12 +202,12 @@ export default function AdminTeachers() {
             </div>
 
             <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', marginBottom: '8px', color: '#475569', fontWeight: 'bold' }}>Jabatan / Guru Mapel (Wajib)</label>
+              <label style={{ display: 'block', marginBottom: '8px', color: '#475569', fontWeight: 'bold' }}>Jabatan (Wajib)</label>
               <input 
                 type="text" 
                 value={subject} 
                 onChange={e => setSubject(e.target.value)} 
-                placeholder="Misal: Guru Bahasa Indonesia"
+                placeholder="Misal: Tata Usaha / Operator Dapodik"
                 style={{ width: '100%', padding: '12px', border: '1px solid #cbd5e1', borderRadius: '6px', outline: 'none' }}
               />
             </div>
@@ -217,7 +217,7 @@ export default function AdminTeachers() {
               <RichTextEditor
                 value={description} 
                 onChange={(val) => setDescription(val)} 
-                placeholder="Tuliskan biografi atau keterangan guru..."
+                placeholder="Tuliskan biografi atau keterangan pegawai..."
               />
             </div>
 
@@ -263,7 +263,7 @@ export default function AdminTeachers() {
                   transition: 'background 0.2s'
                 }}
               >
-                {loading ? 'Menyimpan...' : (editingId ? 'Simpan Perubahan' : 'Simpan Data Guru')}
+                {loading ? 'Menyimpan...' : (editingId ? 'Simpan Perubahan' : 'Simpan Data Pegawai')}
               </button>
               {editingId && (
                 <button 
@@ -281,10 +281,10 @@ export default function AdminTeachers() {
           </form>
         </div>
 
-        {/* List Guru */}
+        {/* List Pegawai */}
         <div style={{ background: 'white', padding: '30px', borderRadius: '12px', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', border: '1px solid #e2e8f0', alignSelf: 'start' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', borderBottom: '1px solid #e2e8f0', paddingBottom: '10px' }}>
-            <h2 style={{ fontSize: '1.2rem', color: '#1e293b', margin: 0 }}>Daftar Guru</h2>
+            <h2 style={{ fontSize: '1.2rem', color: '#1e293b', margin: 0 }}>Daftar Pegawai</h2>
             <span style={{ background: '#e2e8f0', padding: '4px 12px', borderRadius: '20px', fontSize: '0.85rem', color: '#475569', fontWeight: 'bold' }}>Total: {teachers.length}</span>
           </div>
           <p style={{ fontSize: '0.8rem', color: '#64748b', margin: '0 0 15px 0' }}>
@@ -294,7 +294,7 @@ export default function AdminTeachers() {
 
           {teachers.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '40px 0', color: '#94a3b8' }}>
-              <p>Belum ada data guru.</p>
+              <p>Belum ada data pegawai.</p>
             </div>
           ) : (
             <div style={{ display: 'grid', gap: '15px' }}>

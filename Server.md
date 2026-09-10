@@ -63,7 +63,8 @@
 | Manajer proses | PM2, nama app **`web-sekolah`**, mode `fork` (lihat `ecosystem.config.js`) |
 | Auto-start | `pm2-startup` + `pm2 save` (skrip `setup_server.bat`) |
 | Env produksi | `.env.production` di folder repo (**git-ignored**, hanya ada di server). Berisi `JWT_SECRET`. |
-| Database | SQLite `dev.db` di folder repo (**git-ignored** — tidak ikut push!) |
+| Database | SQLite **`prisma/dev.db`** (**git-ignored** — tidak ikut push!) |
+| Skema | `prisma/schema.prisma`; tanpa folder migrasi (perubahan skema via `prisma db push`) |
 | Upload gambar | `public/uploads/` (**git-ignored** kecuali `.gitkeep`) |
 
 ### Perintah operasional rutin (jalankan di folder repo)
@@ -94,11 +95,27 @@ Database dan foto **tidak ikut ke GitHub**. Kalau harddisk rusak tanpa backup,
 data hilang permanen. Cadangkan minimal mingguan:
 
 ```cmd
-xcopy dev.db D:\Backup-Web-Sekolah\dev.db-2026-09-09 /Y
+xcopy prisma\dev.db D:\Backup-Web-Sekolah\dev.db-2026-09-09 /Y
 xcopy public\uploads D:\Backup-Web-Sekolah\uploads\ /E /Y /I
 ```
 
+> PENTING: database aktif adalah `prisma/dev.db`. File `dev.db` di root repo
+> adalah sisa lama (usang) — jangan di-backup, jangan dipakai.
+
 Ganti `D:\Backup-Web-Sekolah` dengan flashdisk/HDD eksternal.
+
+### Ubah struktur database (bila perlu)
+
+Repo ini tanpa folder migrasi — pakai `db push` (PM2 harus berhenti dulu
+karena file Prisma terkunci saat server jalan):
+
+```cmd
+pm2 stop web-sekolah
+npx prisma db push
+npx prisma generate
+npm run build
+pm2 restart web-sekolah && pm2 save
+```
 
 ---
 
