@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import Image from 'next/image';
+import PageBreadcrumbs from '@/components/PageBreadcrumbs';
 
 export const revalidate = 60; // Disable cache for demo purposes
 
@@ -17,6 +18,7 @@ export default async function Page() {
 
   return (
     <main style={{ paddingBottom: '0', background: '#f8f9fa' }}>
+      <PageBreadcrumbs trail={[{ name: 'Visi dan Misi', url: 'https://smpn3-cibungbulang.sch.id/tentang-kami/visi-misi' }]} />
       {/* Banner / Hero Section */}
       <section style={{ 
         position: 'relative', 

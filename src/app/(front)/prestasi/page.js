@@ -2,6 +2,7 @@ import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import Image from 'next/image';
 import ScrollAnimation from '@/components/ScrollAnimation';
+import PageBreadcrumbs from '@/components/PageBreadcrumbs';
 
 export const revalidate = 60; // Disable cache for demo purposes
 
@@ -21,6 +22,7 @@ export default async function Page() {
 
   return (
     <main className="container" style={{ paddingBottom: '80px', paddingTop: '40px' }}>
+      <PageBreadcrumbs trail={[{ name: 'Prestasi Siswa', url: 'https://smpn3-cibungbulang.sch.id/prestasi' }]} />
       <header style={{ marginBottom: '40px' }}>
         <h1 style={{ fontSize: '2.5rem', color: '#1e293b', borderBottom: '3px solid #f1f5f9', paddingBottom: '10px', display: 'inline-block' }}>
           Daftar Prestasi

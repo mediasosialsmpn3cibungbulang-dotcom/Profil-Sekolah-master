@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import TeacherSlider from '@/components/TeacherSlider';
+import PageBreadcrumbs from '@/components/PageBreadcrumbs';
 
 export const revalidate = 60;
 
@@ -72,6 +73,7 @@ export default async function Page() {
       `}} />
 
       <div className="page-header-sdm">
+        <PageBreadcrumbs trail={[{ name: 'Guru dan Tenaga Pendidik', url: 'https://smpn3-cibungbulang.sch.id/tentang-kami/sumber-daya-manusia' }]} />
         <div className="title-container">
           <h2>Guru dan Tenaga Pendidik</h2>
           <p>Mengenal lebih dekat para pendidik dan tenaga kependidikan berdedikasi tinggi di sekolah kami.</p>

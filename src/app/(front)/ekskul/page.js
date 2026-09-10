@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { prisma } from '@/lib/prisma';
+import PageBreadcrumbs from '@/components/PageBreadcrumbs';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,6 +19,7 @@ export default async function Page() {
 
   return (
     <main style={{ backgroundColor: '#f9f9f9', minHeight: '100vh', paddingBottom: '80px' }}>
+      <PageBreadcrumbs trail={[{ name: 'Ekstrakurikuler', url: 'https://smpn3-cibungbulang.sch.id/ekskul' }]} />
       {/* Jumbotron/Header Style */}
       <div style={{
         background: 'linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), url(/images/slide1.png) center center no-repeat',

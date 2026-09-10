@@ -1,7 +1,11 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.10 (Judul Homepage Pendek)  
+**Version:** 2.11 (Breadcrumb SEO)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.11 (Sep 2026):** Breadcrumb terstruktur (schema.org
+BreadcrumbList) di 4 halaman kunci (Prestasi, Ekskul, SDM, Visi Misi) untuk
+membantu kelayakan sitelink Google.
 
 **Changelog v2.10 (Sep 2026):** Judul homepage (dan OG/Twitter) dipendekkan
 menjadi "SMPN 3 Cibungbulang" agar tampil rapi di hasil Google.
