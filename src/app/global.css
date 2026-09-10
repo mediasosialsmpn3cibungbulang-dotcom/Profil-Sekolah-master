@@ -57,6 +57,14 @@ body {
   display: none;
 }
 
+.dd-toggle {
+  display: none;
+}
+
+.dd-label {
+  cursor: pointer;
+}
+
 .zoomable-image {
   cursor: zoom-in;
 }
@@ -483,6 +491,8 @@ body {
   .nav-link { padding: 15px 10px; font-size: 1rem; border-radius: 0; border: none; background: transparent; }
   .dropdown-menu { position: static; box-shadow: none; border: none; display: none; background: #f8fafc; margin-top: 0; width: 100%; padding: 0; }
   .nav-item:hover .dropdown-menu { display: block; animation: none; }
+  /* Dropdown bisa dibuka-TUTUP di HP via klik (checkbox hack) */
+  .dd-toggle:checked ~ .dropdown-menu { display: block !important; }
   .dropdown-item { padding: 12px 20px; font-size: 0.9rem; border-bottom: 1px solid #f1f5f9; color: #64748b; }
   .hero h1 { font-size: 1.8rem !important; }
   .hero p { font-size: 1rem !important; }

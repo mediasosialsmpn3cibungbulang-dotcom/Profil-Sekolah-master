@@ -1,7 +1,11 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.13 (Header SDM Mobile)  
+**Version:** 2.14 (Dropdown HP Toggle)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.14 (Sep 2026):** Menu dropdown navigasi (Tentang Kami, Link)
+di HP diubah jadi toggle klik buka-tutup (sebelumnya hanya bisa dibuka,
+tidak bisa ditutup).
 
 **Changelog v2.13 (Sep 2026):** Header halaman SDM di HP dibuat fleksibel
 (tinggi otomatis + judul 1.5rem) agar judul panjang "Guru dan Tenaga

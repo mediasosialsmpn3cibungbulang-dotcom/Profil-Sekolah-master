@@ -23,7 +23,8 @@ export default function FrontLayout({ children }) {
             <li className="nav-item"><a href="/" className="nav-link">Home</a></li>
 
             <li className="nav-item">
-              <a href="#" className="nav-link">Tentang Kami ▾</a>
+              <input type="checkbox" id="dd-tentang" className="dd-toggle" />
+              <label htmlFor="dd-tentang" className="nav-link dd-label">Tentang Kami ▾</label>
               <ul className="dropdown-menu">
                 <li><a href="/tentang-kami/sambutan-kepala-sekolah" className="dropdown-item">Sambutan Kepala Sekolah</a></li>
                 <li><a href="/tentang-kami/sejarah-sekolah" className="dropdown-item">Sejarah Sekolah</a></li>
@@ -43,7 +44,8 @@ export default function FrontLayout({ children }) {
             <li className="nav-item"><a href="/berita" className="nav-link">Berita & Kegiatan</a></li>
 
             <li className="nav-item">
-              <a href="#" className="nav-link">Link ▾</a>
+              <input type="checkbox" id="dd-link" className="dd-toggle" />
+              <label htmlFor="dd-link" className="nav-link dd-label">Link ▾</label>
               <ul className="dropdown-menu">
                 <li><a href="https://www.instagram.com/smpn3cibungbulang_official" target="_blank" rel="noopener noreferrer" className="dropdown-item">Instagram Sekolah</a></li>
                 <li><a href="https://youtube.com/@smpn1bogor" target="_blank" rel="noopener noreferrer" className="dropdown-item">Youtube Sekolah</a></li>
