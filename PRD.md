@@ -1,11 +1,11 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.14 (Dropdown HP Toggle)  
+**Version:** 2.15 (Fix Toggle Dropdown HP)  
 **Status:** Complete & Production Tested  
 
-**Changelog v2.14 (Sep 2026):** Menu dropdown navigasi (Tentang Kami, Link)
-di HP diubah jadi toggle klik buka-tutup (sebelumnya hanya bisa dibuka,
-tidak bisa ditutup).
+**Changelog v2.15 (Sep 2026):** Lanjutan v2.14 — hover dropdown dimatikan
+total di HP karena hover sentuh itu lengket (menu tidak mau menutup);
+buka/tutup kini murni via klik.
 
 **Changelog v2.13 (Sep 2026):** Header halaman SDM di HP dibuat fleksibel
 (tinggi otomatis + judul 1.5rem) agar judul panjang "Guru dan Tenaga

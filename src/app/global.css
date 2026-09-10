@@ -490,7 +490,8 @@ body {
   .nav-item:last-child { border-bottom: none; }
   .nav-link { padding: 15px 10px; font-size: 1rem; border-radius: 0; border: none; background: transparent; }
   .dropdown-menu { position: static; box-shadow: none; border: none; display: none; background: #f8fafc; margin-top: 0; width: 100%; padding: 0; }
-  .nav-item:hover .dropdown-menu { display: block; animation: none; }
+  /* Di HP hover dimatikan total (hover sentuh itu lengket) — buka/tutup HANYA via klik */
+  .nav-item:hover .dropdown-menu { display: none; animation: none; }
   /* Dropdown bisa dibuka-TUTUP di HP via klik (checkbox hack) */
   .dd-toggle:checked ~ .dropdown-menu { display: block !important; }
   .dropdown-item { padding: 12px 20px; font-size: 0.9rem; border-bottom: 1px solid #f1f5f9; color: #64748b; }
