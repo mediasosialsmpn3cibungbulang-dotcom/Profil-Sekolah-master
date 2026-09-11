@@ -15,6 +15,7 @@ export default function AdminTeachers() {
   const [instagram, setInstagram] = useState('');
   const [tiktok, setTiktok] = useState('');
   const [email, setEmail] = useState('');
+  const [youtube, setYoutube] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [editingId, setEditingId] = useState(null);
   const [existingImageUrl, setExistingImageUrl] = useState('');
@@ -71,7 +72,7 @@ export default function AdminTeachers() {
         }
       }
       
-      const payload = { name, subject, photoUrl: finalImageUrl, description, additionalRole, category: 'GURU', instagram, tiktok, email };
+      const payload = { name, subject, photoUrl: finalImageUrl, description, additionalRole, category: 'GURU', instagram, tiktok, email, youtube };
       let res;
 
       if (editingId) {
@@ -96,6 +97,7 @@ export default function AdminTeachers() {
         setInstagram('');
         setTiktok('');
         setEmail('');
+        setYoutube('');
         setImageFile(null);
         setEditingId(null);
         setExistingImageUrl('');
@@ -120,6 +122,7 @@ export default function AdminTeachers() {
     setInstagram(t.instagram || '');
     setTiktok(t.tiktok || '');
     setEmail(t.email || '');
+    setYoutube(t.youtube || '');
     setEditingId(t.id);
     setExistingImageUrl(t.photoUrl || '');
     setImageFile(null);
@@ -134,6 +137,7 @@ export default function AdminTeachers() {
     setInstagram('');
     setTiktok('');
     setEmail('');
+    setYoutube('');
     setEditingId(null);
     setExistingImageUrl('');
     setImageFile(null);
@@ -266,6 +270,13 @@ export default function AdminTeachers() {
                 onChange={e => setEmail(e.target.value)} 
                 placeholder="Email (misal: nama@email.com)"
                 style={{ width: '100%', padding: '12px', border: '1px solid #cbd5e1', borderRadius: '6px', outline: 'none' }}
+              />
+              <input
+                type='text'
+                value={youtube}
+                onChange={e => setYoutube(e.target.value)}
+                placeholder='YouTube: nama channel atau link (misal: @smpn3cibungbulang)'
+                style={{ width: '100%', padding: '12px', border: '1px solid #cbd5e1', borderRadius: '6px', outline: 'none', marginTop: '10px' }}
               />
               <small style={{ color: '#64748b', display: 'block', marginTop: '5px' }}>*Kosongkan bila tidak ada. Ikon sosmed muncul di popup profil.</small>
             </div>

@@ -1,7 +1,11 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.18 (Bersih Link Sosmed)  
+**Version:** 2.19 (Facebook + YouTube Guru)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.19 (Sep 2026):** Facebook resmi sekolah di menu Link &
+footer; field baru `Teacher.youtube` + isian YouTube di form Kelola Guru &
+Kelola Tenaga Pendidik + ikon YouTube hitam di popup profil.
 
 **Changelog v2.18 (Sep 2026):** Link YouTube & TikTok yang salah mengarah
 ke akun SMPN 1 Bogor dicabut dari menu Link dan footer; tersisa Instagram

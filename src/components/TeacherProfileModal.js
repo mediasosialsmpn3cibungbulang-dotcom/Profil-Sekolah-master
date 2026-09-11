@@ -62,6 +62,15 @@ function EmailIcon() {
     </svg>
   );
 }
+
+function YoutubeIcon() {
+  return (
+    <svg {...iconProps}>
+      <rect x="2.5" y="5.5" width="19" height="13" rx="4" />
+      <path d="M10.3 9.3l4.8 2.7-4.8 2.7z" fill="#111111" stroke="none" />
+    </svg>
+  );
+}
 export default function TeacherProfileModal({ teacher, onClose }) {
   const [mounted, setMounted] = useState(false); // untuk portal (hindari error SSR)
 
@@ -135,6 +144,7 @@ export default function TeacherProfileModal({ teacher, onClose }) {
                 const links = [
                   { href: toSocialUrl(teacher.instagram, 'https://instagram.com/'), label: `Instagram ${teacher.name}`, Icon: InstagramIcon },
                   { href: toSocialUrl(teacher.tiktok, 'https://tiktok.com/@'), label: `TikTok ${teacher.name}`, Icon: TiktokIcon },
+                  { href: toSocialUrl(teacher.youtube, 'https://youtube.com/@'), label: `YouTube ${teacher.name}`, Icon: YoutubeIcon },
                   { href: teacher.email && teacher.email.includes('@') ? `mailto:${teacher.email.trim()}` : null, label: `Email ${teacher.name}`, Icon: EmailIcon },
                 ];
                 return (
