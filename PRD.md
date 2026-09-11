@@ -1,7 +1,11 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.20 (Sosmed Resmi Lengkap)  
+**Version:** 2.21 (Foto Prestasi Rapi)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.21 (Sep 2026):** Bingkai foto kartu prestasi diseragamkan
+rasio 4:3 dengan foto utuh tanpa potong (contain) — foto landscape maupun
+portrait sejajar rapi di beranda & halaman Prestasi.
 
 **Changelog v2.20 (Sep 2026):** Akun resmi TikTok (@smpn3cibungbulang_) &
 YouTube (@smpn3cibungbulang) dipasang di menu Link & footer (URL bersih
