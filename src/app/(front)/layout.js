@@ -48,8 +48,6 @@ export default function FrontLayout({ children }) {
               <label htmlFor="dd-link" className="nav-link dd-label">Link ▾</label>
               <ul className="dropdown-menu">
                 <li><a href="https://www.instagram.com/smpn3cibungbulang_official" target="_blank" rel="noopener noreferrer" className="dropdown-item">Instagram Sekolah</a></li>
-                <li><a href="https://youtube.com/@smpn1bogor" target="_blank" rel="noopener noreferrer" className="dropdown-item">Youtube Sekolah</a></li>
-                <li><a href="https://tiktok.com/@smpn1bogor" target="_blank" rel="noopener noreferrer" className="dropdown-item">Tiktok Sekolah</a></li>
               </ul>
             </li>
           </ul>
@@ -76,12 +74,6 @@ export default function FrontLayout({ children }) {
             <div style={{ display: 'flex', gap: '15px' }}>
               <a href="https://www.instagram.com/smpn3cibungbulang_official" target="_blank" rel="noopener noreferrer">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram" style={{ width: '40px', height: '40px', background: 'white', borderRadius: '8px', padding: '2px' }} />
-              </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube" style={{ width: '40px', height: '40px', background: 'white', borderRadius: '8px', padding: '5px' }} />
-              </a>
-              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
-                <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok" style={{ width: '40px', height: '40px', background: 'white', borderRadius: '8px', padding: '5px' }} />
               </a>
             </div>
           </div>

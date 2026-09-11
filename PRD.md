@@ -1,7 +1,11 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.17 (Urutan Prestasi)  
+**Version:** 2.18 (Bersih Link Sosmed)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.18 (Sep 2026):** Link YouTube & TikTok yang salah mengarah
+ke akun SMPN 1 Bogor dicabut dari menu Link dan footer; tersisa Instagram
+resmi sekolah sampai akun aslinya siap.
 
 **Changelog v2.17 (Sep 2026):** Urutan prestasi di beranda & halaman
 Prestasi: tingkat tertinggi dulu (Internasional → Nasional → Provinsi →
