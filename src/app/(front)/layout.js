@@ -48,6 +48,8 @@ export default function FrontLayout({ children }) {
               <label htmlFor="dd-link" className="nav-link dd-label">Link ▾</label>
               <ul className="dropdown-menu">
                 <li><a href="https://www.instagram.com/smpn3cibungbulang_official" target="_blank" rel="noopener noreferrer" className="dropdown-item">Instagram Sekolah</a></li>
+                <li><a href="https://www.tiktok.com/@smpn3cibungbulang_" target="_blank" rel="noopener noreferrer" className="dropdown-item">TikTok Sekolah</a></li>
+                <li><a href="https://youtube.com/@smpn3cibungbulang" target="_blank" rel="noopener noreferrer" className="dropdown-item">YouTube Sekolah</a></li>
                 <li><a href="https://www.facebook.com/smpn3cibungbulang" target="_blank" rel="noopener noreferrer" className="dropdown-item">Facebook Sekolah</a></li>
               </ul>
             </li>
@@ -75,6 +77,12 @@ export default function FrontLayout({ children }) {
             <div style={{ display: 'flex', gap: '15px' }}>
               <a href="https://www.instagram.com/smpn3cibungbulang_official" target="_blank" rel="noopener noreferrer">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram" style={{ width: '40px', height: '40px', background: 'white', borderRadius: '8px', padding: '2px' }} />
+              </a>
+              <a href="https://www.tiktok.com/@smpn3cibungbulang_" target="_blank" rel="noopener noreferrer">
+                <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok" style={{ width: '40px', height: '40px', background: 'white', borderRadius: '8px', padding: '5px' }} />
+              </a>
+              <a href="https://youtube.com/@smpn3cibungbulang" target="_blank" rel="noopener noreferrer">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube" style={{ width: '40px', height: '40px', background: 'white', borderRadius: '8px', padding: '5px' }} />
               </a>
               <a href="https://www.facebook.com/smpn3cibungbulang" target="_blank" rel="noopener noreferrer">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style={{ width: '40px', height: '40px', background: 'white', borderRadius: '8px', padding: '2px' }} />
