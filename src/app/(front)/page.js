@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma';
+import { sortAchievements } from '@/lib/achievements';
 import ImageSlider from '@/components/ImageSlider';
 import NewsSlider from '@/components/NewsSlider';
 import TeacherSlider from '@/components/TeacherSlider';
@@ -18,10 +19,9 @@ export default async function Home() {
     take: 10 // Increased to allow slider demonstration
   });
 
-  const achievements = await prisma.achievement.findMany({
-    orderBy: { createdAt: 'desc' },
-    take: 3
-  });
+  const achievements = sortAchievements(
+    await prisma.achievement.findMany()
+  ).slice(0, 3); // tingkat tertinggi + terbaru, tampil di beranda
 
   const sliders = await prisma.slider.findMany({
     where: { isActive: true },

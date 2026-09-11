@@ -1,7 +1,12 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.16 (Canonical Homepage)  
+**Version:** 2.17 (Urutan Prestasi)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.17 (Sep 2026):** Urutan prestasi di beranda & halaman
+Prestasi: tingkat tertinggi dulu (Internasional → Nasional → Provinsi →
+Kabupaten/Kota → Kecamatan → Sekolah), lalu tanggal kegiatan terbaru
+(`src/lib/achievements.js`).
 
 **Changelog v2.16 (Sep 2026):** Tambah canonical homepage ke versi HTTPS
 agar duplikat http/https di hasil Google menggabung menjadi satu.

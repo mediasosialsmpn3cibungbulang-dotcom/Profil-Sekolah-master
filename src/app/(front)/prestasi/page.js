@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma';
+import { sortAchievements } from '@/lib/achievements';
 import Link from 'next/link';
 import Image from 'next/image';
 import ScrollAnimation from '@/components/ScrollAnimation';
@@ -14,9 +15,9 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const achievements = await prisma.achievement.findMany({
-    orderBy: { createdAt: 'desc' }
-  });
+  const achievements = sortAchievements(
+    await prisma.achievement.findMany()
+  ); // tingkat tertinggi dulu, lalu tanggal terbaru
 
   const borderColors = ['#2563eb', '#16a34a', '#d97706', '#9333ea', '#db2777'];
 
