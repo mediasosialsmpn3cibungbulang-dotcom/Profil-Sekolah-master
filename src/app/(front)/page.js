@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { sortAchievements } from '@/lib/achievements';
 import ImageSlider from '@/components/ImageSlider';
+import SambutanText from '@/components/SambutanText';
 import NewsSlider from '@/components/NewsSlider';
 import TeacherSlider from '@/components/TeacherSlider';
 import ScrollAnimation from '@/components/ScrollAnimation';
@@ -90,7 +91,7 @@ export default async function Home() {
             <h2 style={{ fontSize: '2rem', color: '#1e293b', marginBottom: '20px' }}>{sambutan?.title || 'Sambutan Kepala Sekolah'}</h2>
             
             {sambutan?.content ? (
-              <div className="rich-text-content" dangerouslySetInnerHTML={{ __html: sambutan.content.replace(/&nbsp;|\u00A0/g, ' ') }} />
+              <SambutanText html={sambutan.content.replace(/&nbsp;|\u00A0/g, ' ')} />
             ) : (
               <>
                 <p style={{ color: '#475569', marginBottom: '15px', fontSize: '0.95rem' }}>
