@@ -1,7 +1,11 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.21 (Foto Prestasi Rapi)  
+**Version:** 2.22 (Sambutan Mobile Rapi)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.22 (Sep 2026):** Sambutan kepala sekolah di HP diperbaiki —
+gambar/video/tabel dalam teks tidak bisa meluber dari layar, foto & judul
+tengah simetris.
 
 **Changelog v2.21 (Sep 2026):** Bingkai foto kartu prestasi diseragamkan
 rasio 4:3 dengan foto utuh tanpa potong (contain) — foto landscape maupun
