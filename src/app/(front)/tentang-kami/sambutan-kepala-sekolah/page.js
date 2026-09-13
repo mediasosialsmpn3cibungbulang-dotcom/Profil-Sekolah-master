@@ -34,8 +34,8 @@ export default async function Page() {
           
           <div style={{ position: 'relative' }}>
             
-            {/* Image Floating Right */}
-            <div style={{ 
+            {/* Image Floating Right (menumpuk tengah di HP) */}
+            <div className="sambutan-photo" style={{ 
               float: 'right', 
               marginLeft: '40px', 
               marginBottom: '20px',
