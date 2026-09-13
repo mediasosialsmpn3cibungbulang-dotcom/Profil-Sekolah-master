@@ -179,7 +179,7 @@ export default function AdminEkskul() {
                 />
               </div>
               <div>
-                <label style={{ display: 'block', marginBottom: '8px', color: '#475569', fontWeight: 'bold' }}>Nama Pembina</label>
+                <label style={{ display: 'block', marginBottom: '8px', color: '#475569', fontWeight: 'bold' }}>Nama Pelatih</label>
                 <input 
                   type="text" 
                   value={pembina} 
@@ -286,7 +286,7 @@ export default function AdminEkskul() {
                           </div>
                         )}
                         <div style={{ margin: '0 0 6px 0', color: '#64748b', fontSize: '0.9rem' }}>
-                          <strong>Pembina:</strong> {ach.pembina} <br/>
+                          <strong>Pelatih:</strong> {ach.pembina} <br/>
                           <strong>Jadwal:</strong> {ach.jadwal}
                         </div>
                         <div 

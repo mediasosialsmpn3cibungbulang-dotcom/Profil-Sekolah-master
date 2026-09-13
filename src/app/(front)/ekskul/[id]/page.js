@@ -52,7 +52,7 @@ export default async function EkskulDetail({ params }) {
             </h3>
             
             <p style={{ color: '#1E90FF', fontWeight: 'bold', fontSize: '1.1rem', margin: '20px 0 10px 0' }}>
-              Pembina : {ekskul.pembina || '-'}
+              Pelatih : {ekskul.pembina || '-'}
             </p>
             {ekskul.jadwal && (
               <p style={{ color: '#64748b', fontWeight: 'bold', fontSize: '1rem', margin: '0 0 25px 0' }}>

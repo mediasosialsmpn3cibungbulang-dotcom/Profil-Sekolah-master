@@ -1,7 +1,11 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.27 (Profil Sekolah Mobile)  
+**Version:** 2.28 (Pembina → Pelatih)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.28 (Sep 2026):** Sebutan "Pembina" di halaman Ekskul
+(daftar, detail, panel admin) diganti "Pelatih". Nama field data tidak
+berubah.
 
 **Changelog v2.27 (Sep 2026):** Kartu profil sekolah di HP dirampingkan
 (padding kecil, font kecil, kolom bisa menyusut) agar muat dan tengah

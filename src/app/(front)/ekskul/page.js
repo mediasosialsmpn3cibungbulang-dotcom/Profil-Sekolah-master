@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 export const metadata = {
   title: 'Ekstrakurikuler',
   description:
-    'Direktori kegiatan ekstrakurikuler SMP Negeri 3 Cibungbulang — pembina, jadwal, dan galeri kegiatan.',
+    'Direktori kegiatan ekstrakurikuler SMP Negeri 3 Cibungbulang — pelatih, jadwal, dan galeri kegiatan.',
   alternates: { canonical: 'https://smpn3-cibungbulang.sch.id/ekskul' },
 };
 
@@ -98,7 +98,7 @@ export default async function Page() {
                     fontWeight: 'bold', 
                     fontSize: '1.05rem' 
                   }}>
-                    Pembina : {ekskul.pembina}
+                    Pelatih : {ekskul.pembina}
                   </div>
                 </div>
               </div>

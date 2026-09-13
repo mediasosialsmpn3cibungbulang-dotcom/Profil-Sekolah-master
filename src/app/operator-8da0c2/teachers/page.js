@@ -243,7 +243,7 @@ export default function AdminTeachers() {
                 type="text" 
                 value={additionalRole} 
                 onChange={e => setAdditionalRole(e.target.value)} 
-                placeholder="Misal: Wali Kelas / Pembina Ekstrakurikuler"
+                placeholder="Misal: Wali Kelas / Pelatih Ekstrakurikuler"
                 style={{ width: '100%', padding: '12px', border: '1px solid #cbd5e1', borderRadius: '6px', outline: 'none' }}
               />
             </div>
