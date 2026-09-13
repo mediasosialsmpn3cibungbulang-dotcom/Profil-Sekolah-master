@@ -1,7 +1,11 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.23 (Sambutan HP + Selengkapnya)  
+**Version:** 2.24 (Sambutan Link + Judul 2 Baris)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.24 (Sep 2026):** Tombol Lihat Selengkapnya sambutan (HP)
+menuju halaman Sambutan Kepala Sekolah; judul sambutan dipatah 2 baris
+khusus tampilan HP.
 
 **Changelog v2.23 (Sep 2026):** Sambutan di HP: teks dipadatkan 6 baris +
 tombol Lihat Selengkapnya/Tutup; seluruh pembungkus dikunci selebar layar

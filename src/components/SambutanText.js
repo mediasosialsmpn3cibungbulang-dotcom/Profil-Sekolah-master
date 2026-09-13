@@ -1,30 +1,25 @@
-'use client';
+// Teks sambutan: di HP dipadatkan 6 baris + tombol menuju halaman
+// sambutan lengkap; di desktop tampil penuh seperti biasa.
+import Link from 'next/link';
 
-import { useState } from 'react';
-
-// Teks sambutan: di HP dipadatkan + tombol Lihat Selengkapnya,
-// di desktop tampil penuh seperti biasa.
 export default function SambutanText({ html }) {
-  const [open, setOpen] = useState(false);
-
   return (
     <div className="sambutan-text-wrap">
       <div
-        className={`rich-text-content sambutan-clamp${open ? ' open' : ''}`}
+        className="rich-text-content sambutan-clamp"
         dangerouslySetInnerHTML={{ __html: html }}
       />
-      <button
-        type="button"
+      <Link
+        href="/tentang-kami/sambutan-kepala-sekolah"
         className="sambutan-more-btn"
-        onClick={() => setOpen(!open)}
       >
-        {open ? 'Tutup ▲' : 'Lihat Selengkapnya ▼'}
-      </button>
+        Lihat Selengkapnya ▼
+      </Link>
       <style>{`
         .sambutan-more-btn { display: none; }
         @media (max-width: 768px) {
           .sambutan-text-wrap { max-width: 100%; overflow: hidden; }
-          .sambutan-clamp:not(.open) {
+          .sambutan-clamp {
             display: -webkit-box;
             -webkit-line-clamp: 6;
             -webkit-box-orient: vertical;
@@ -41,6 +36,7 @@ export default function SambutanText({ html }) {
             font-weight: bold;
             font-size: 0.9rem;
             cursor: pointer;
+            text-decoration: none;
           }
         }
       `}</style>

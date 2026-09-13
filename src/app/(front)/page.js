@@ -31,6 +31,10 @@ export default async function Home() {
 
   const sambutan = await prisma.sambutan.findFirst();
 
+  // Judul sambutan: kata pertama / sisanya (untuk patahan 2 baris di HP)
+  const sambutanTitle = sambutan?.title || 'Sambutan Kepala Sekolah';
+  const [sambutanFirst, ...sambutanRest] = sambutanTitle.split(' ');
+
   const teachers = await prisma.teacher.findMany({
     where: { category: 'GURU' },
     orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
@@ -88,7 +92,7 @@ export default async function Home() {
         </div>
         <div className="flex-content">
           <ScrollAnimation animation="slide-right">
-            <h2 style={{ fontSize: '2rem', color: '#1e293b', marginBottom: '20px' }}>{sambutan?.title || 'Sambutan Kepala Sekolah'}</h2>
+            <h2 style={{ fontSize: '2rem', color: '#1e293b', marginBottom: '20px' }}>{sambutanFirst} <br className="mobile-only-br" />{sambutanRest.join(' ')}</h2>
             
             {sambutan?.content ? (
               <SambutanText html={sambutan.content.replace(/&nbsp;|\u00A0/g, ' ')} />
