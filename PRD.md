@@ -1,7 +1,12 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.24 (Sambutan Link + Judul 2 Baris)  
+**Version:** 2.25 (Fix Animasi Nyangkut)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.25 (Sep 2026):** Bug urutan CSS animasi scroll — efek
+geser tidak pernah selesai sehingga foto & teks sambutan HP terjebak
+bergeser dan terpotong kanan; `.is-visible` dipindah ke bawah varian +
+foto HP dikunci maksimal 250px.
 
 **Changelog v2.24 (Sep 2026):** Tombol Lihat Selengkapnya sambutan (HP)
 menuju halaman Sambutan Kepala Sekolah; judul sambutan dipatah 2 baris
