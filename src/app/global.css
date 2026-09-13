@@ -534,6 +534,13 @@ body {
     max-width: 280px !important;
     margin: 0 auto 24px auto !important;
   }
+  /* Kartu profil sekolah: ramping agar muat layar HP */
+  .profil-card-bg { padding: 20px 15px !important; }
+  .profil-card-content { padding: 20px 15px !important; }
+  .profil-info-grid { gap: 10px !important; }
+  .profil-info-box { min-width: 0; padding: 12px 8px !important; }
+  .profil-info-title { font-size: 0.65rem !important; }
+  .profil-info-value { font-size: 0.8rem !important; overflow-wrap: break-word; }
 
   /* Judul & halaman detail di HP */
   main h1 { font-size: 1.7rem !important; }

@@ -1,7 +1,11 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.26 (Foto Sambutan Tengah)  
+**Version:** 2.27 (Profil Sekolah Mobile)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.27 (Sep 2026):** Kartu profil sekolah di HP dirampingkan
+(padding kecil, font kecil, kolom bisa menyusut) agar muat dan tengah
+di layar kecil.
 
 **Changelog v2.26 (Sep 2026):** Foto halaman Sambutan Kepala Sekolah di
 HP tidak lagi float-kanan (biang tidak tengah di sebagian device);
