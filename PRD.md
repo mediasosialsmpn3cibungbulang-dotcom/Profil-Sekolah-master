@@ -6,6 +6,7 @@
 **Changelog v2.29 (Sep 2026):** Perbaiki LCP PageSpeed (13,5 dtk di HP) —
 hero slider pakai next/image (srcset responsif + preload slide pertama,
 hanya render 2 slide); Logo 1MB dikompres ke JPG 49KB.
+Terverifikasi PageSpeed: Desktop 100, Mobile 96.
 
 **Changelog v2.28 (Sep 2026):** Sebutan "Pembina" di halaman Ekskul
 (daftar, detail, panel admin) diganti "Pelatih". Nama field data tidak
