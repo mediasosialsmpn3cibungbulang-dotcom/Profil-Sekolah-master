@@ -1,7 +1,11 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.29 (Optimasi LCP)  
+**Version:** 2.30 (Navigasi SEO + Admin Noindex)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.30 (Sep 2026):** Schema `SiteNavigationElement` di seluruh
+halaman publik (pendukung kelayakan sitelink); halaman admin dipaksa
+`X-Robots-Tag: noindex` via proxy agar tak terindeks Google.
 
 **Changelog v2.29 (Sep 2026):** Perbaiki LCP PageSpeed (13,5 dtk di HP) —
 hero slider pakai next/image (srcset responsif + preload slide pertama,

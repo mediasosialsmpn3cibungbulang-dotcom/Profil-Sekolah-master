@@ -1,9 +1,32 @@
 import Link from 'next/link';
 import GlobalLightbox from '@/components/GlobalLightbox';
 
+const BASE = 'https://smpn3-cibungbulang.sch.id';
+
+// Struktur navigasi utama untuk mesin pencari (membantu kelayakan sitelink)
+const siteNavJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SiteNavigationElement',
+  name: 'Navigasi Utama SMPN 3 Cibungbulang',
+  hasPart: [
+    { '@type': 'WebPage', name: 'Beranda', url: `${BASE}/` },
+    { '@type': 'WebPage', name: 'Prestasi Siswa', url: `${BASE}/prestasi` },
+    { '@type': 'WebPage', name: 'Ekstrakurikuler', url: `${BASE}/ekskul` },
+    { '@type': 'WebPage', name: 'Berita & Kegiatan', url: `${BASE}/berita` },
+    { '@type': 'WebPage', name: 'Profil Sekolah', url: `${BASE}/tentang-kami/profil-sekolah` },
+    { '@type': 'WebPage', name: 'Visi dan Misi', url: `${BASE}/tentang-kami/visi-misi` },
+    { '@type': 'WebPage', name: 'Guru dan Tenaga Pendidik', url: `${BASE}/tentang-kami/sumber-daya-manusia` },
+    { '@type': 'WebPage', name: 'Sambutan Kepala Sekolah', url: `${BASE}/tentang-kami/sambutan-kepala-sekolah` },
+  ],
+};
+
 export default function FrontLayout({ children }) {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNavJsonLd) }}
+      />
       <GlobalLightbox />
       <nav className="navbar">
         <div className="container nav-container">

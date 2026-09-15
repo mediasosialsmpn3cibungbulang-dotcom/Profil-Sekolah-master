@@ -44,6 +44,14 @@ export async function proxy(request) {
     return response;
   }
 
+  // Halaman admin (termasuk login): jangan pernah terindeks Google.
+  // (Path-nya TIDAK ditulis di robots.txt agar tetap rahasia.)
+  if (pathname.startsWith('/operator-8da0c2')) {
+    const response = NextResponse.next();
+    response.headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive');
+    return response;
+  }
+
   // Pass-through
   return NextResponse.next();
 }
