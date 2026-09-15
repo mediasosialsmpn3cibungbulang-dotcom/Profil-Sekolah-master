@@ -8,7 +8,7 @@ export default function FrontLayout({ children }) {
       <nav className="navbar">
         <div className="container nav-container">
           <Link href="/" className="nav-logo" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none', color: 'inherit', zIndex: 1001 }}>
-            <img src="/images/Logo.png" alt="Logo SMPN 3 Cibungbulang" style={{ height: '40px', width: 'auto' }} />
+            <img src="/images/Logo.jpg" alt="Logo SMPN 3 Cibungbulang" style={{ height: '40px', width: 'auto' }} />
             <h2 style={{ margin: 0, fontSize: 'inherit', color: 'inherit' }}>SMPN 3 Cibungbulang</h2>
           </Link>
 

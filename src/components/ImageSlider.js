@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 const defaultSlides = [
   { id: 1, src: '/images/slide1.png', caption: 'Fasilitas Sekolah yang Modern dan Nyaman' },
@@ -9,6 +10,7 @@ const defaultSlides = [
 
 export default function ImageSlider({ sliders }) {
   const [current, setCurrent] = useState(0);
+  const [prev, setPrev] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Use dynamic sliders if available, otherwise fallback to default
@@ -16,16 +18,28 @@ export default function ImageSlider({ sliders }) {
     ? sliders.map(s => ({ id: s.id, src: s.imageUrl, caption: s.caption }))
     : defaultSlides;
 
+  const goTo = (index) => {
+    setPrev(current);
+    setCurrent(index);
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrent((prev) => (prev === activeSlides.length - 1 ? 0 : prev + 1));
+      goTo(current === activeSlides.length - 1 ? 0 : current + 1);
     }, 5000);
     return () => clearInterval(timer);
-  }, [activeSlides.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeSlides.length, current]);
+
+  // Hanya render slide aktif + sebelumnya (hemat unduhan);
+  // slide pertama prioritas agar LCP cepat + otomatis preload.
+  const visibleIdx = new Set([current, prev]);
 
   return (
     <div className="slider-container" style={{ position: 'relative', width: '100%', height: '500px', overflow: 'hidden', borderRadius: '16px', marginTop: '30px', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)' }}>
-      {activeSlides.map((slide, index) => (
+      {activeSlides.map((slide, index) => {
+        if (!visibleIdx.has(index)) return null;
+        return (
         <div 
           key={slide.id}
           onClick={() => setIsModalOpen(true)}
@@ -38,25 +52,32 @@ export default function ImageSlider({ sliders }) {
             height: '100%',
             opacity: index === current ? 1 : 0,
             transition: 'opacity 1s ease-in-out',
-            backgroundImage: `url(${slide.src})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
             cursor: 'zoom-in'
           }}
         >
+          <Image
+            src={slide.src}
+            alt={slide.caption || 'Foto sekolah'}
+            fill
+            sizes="(max-width: 768px) 100vw, 1200px"
+            priority={index === 0}
+            loading={index === 0 ? 'eager' : 'lazy'}
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
           <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(15, 23, 42, 0.7)', padding: '20px', color: 'white', textAlign: 'center' }}>
             <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 600 }}>{slide.caption}</h2>
           </div>
         </div>
-      ))}
+        );
+      })}
       <button 
-        onClick={() => setCurrent(current === 0 ? activeSlides.length - 1 : current - 1)}
+        onClick={() => goTo(current === 0 ? activeSlides.length - 1 : current - 1)}
         style={{ position: 'absolute', top: '50%', left: '20px', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.3)', border: 'none', color: 'white', fontSize: '2rem', cursor: 'pointer', width: '50px', height: '50px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
       >
         ❮
       </button>
       <button 
-        onClick={() => setCurrent(current === activeSlides.length - 1 ? 0 : current + 1)}
+        onClick={() => goTo(current === activeSlides.length - 1 ? 0 : current + 1)}
         style={{ position: 'absolute', top: '50%', right: '20px', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.3)', border: 'none', color: 'white', fontSize: '2rem', cursor: 'pointer', width: '50px', height: '50px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
       >
         ❯
@@ -65,7 +86,7 @@ export default function ImageSlider({ sliders }) {
         {activeSlides.map((_, index) => (
           <div 
             key={index} 
-            onClick={() => setCurrent(index)}
+            onClick={() => goTo(index)}
             style={{ width: '12px', height: '12px', borderRadius: '50%', background: index === current ? 'white' : 'rgba(255,255,255,0.5)', cursor: 'pointer' }}
           />
         ))}

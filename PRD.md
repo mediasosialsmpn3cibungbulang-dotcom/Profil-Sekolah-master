@@ -1,7 +1,11 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.28 (Pembina → Pelatih)  
+**Version:** 2.29 (Optimasi LCP)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.29 (Sep 2026):** Perbaiki LCP PageSpeed (13,5 dtk di HP) —
+hero slider pakai next/image (srcset responsif + preload slide pertama,
+hanya render 2 slide); Logo 1MB dikompres ke JPG 49KB.
 
 **Changelog v2.28 (Sep 2026):** Sebutan "Pembina" di halaman Ekskul
 (daftar, detail, panel admin) diganti "Pelatih". Nama field data tidak

@@ -26,7 +26,7 @@ export const metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
-      { url: '/images/Logo.png', type: 'image/png' },
+      { url: '/images/Logo.jpg', type: 'image/jpeg' },
     ],
     apple: '/apple-touch-icon.png',
   },
@@ -38,7 +38,7 @@ export const metadata = {
     title: 'SMPN 3 Cibungbulang',
     description:
       'Profil, guru dan tenaga pendidik, prestasi, ekstrakurikuler, berita dan kegiatan SMP Negeri 3 Cibungbulang.',
-    images: [{ url: '/images/Logo.png', width: 512, height: 512, alt: 'Logo SMPN 3 Cibungbulang' }],
+    images: [{ url: '/images/Logo.jpg', width: 512, height: 608, alt: 'Logo SMPN 3 Cibungbulang' }],
   },
   twitter: {
     card: 'summary',
@@ -59,7 +59,7 @@ const schoolJsonLd = {
   name: 'SMP Negeri 3 Cibungbulang',
   alternateName: 'SMPN 3 Cibungbulang',
   url: 'https://smpn3-cibungbulang.sch.id',
-  logo: 'https://smpn3-cibungbulang.sch.id/images/Logo.png',
+  logo: 'https://smpn3-cibungbulang.sch.id/images/Logo.jpg',
   description:
     'SMP Negeri 3 Cibungbulang — sekolah menengah pertama di Kecamatan Cibungbulang, Kabupaten Bogor, Jawa Barat.',
   address: {
