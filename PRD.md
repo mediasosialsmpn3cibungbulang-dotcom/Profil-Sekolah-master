@@ -1,7 +1,12 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.30 (Navigasi SEO + Admin Noindex)  
+**Version:** 2.31 (Stabilitas Performa)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.31 (Sep 2026):** Stabilkan skor PageSpeed — 4 ikon sosmed
+footer di-host lokal (putus ketergantungan upload.wikimedia.org);
+cache hasil optimasi gambar 30 hari agar CPU server tak mengulang
+transcode.
 
 **Changelog v2.30 (Sep 2026):** Schema `SiteNavigationElement` di seluruh
 halaman publik (pendukung kelayakan sitelink); halaman admin dipaksa
