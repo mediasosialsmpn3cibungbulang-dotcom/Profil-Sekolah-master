@@ -1,7 +1,11 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.31 (Stabilitas Performa)  
+**Version:** 2.32 (Berita Detail Mobile)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.32 (Sep 2026):** Halaman detail berita di HP — kartu
+dirampingkan, teks & foto menumpuk penuh (foto tengah maksimal 340px),
+tidak meluber.
 
 **Changelog v2.31 (Sep 2026):** Stabilkan skor PageSpeed — 4 ikon sosmed
 footer di-host lokal (putus ketergantungan upload.wikimedia.org);

@@ -55,7 +55,7 @@ export default async function BeritaDetail({ params }) {
 
       {/* Main Content Container */}
       <section className="container" style={{ padding: '60px 0 100px 0' }}>
-        <div style={{ background: 'white', padding: '50px', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
+        <div className="berita-detail-card" style={{ background: 'white', padding: '50px', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
           
           <h2 style={{ fontSize: '1.2rem', color: '#64748b', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '1px' }}>
             Berita & Kegiatan Sekolah
@@ -68,18 +68,18 @@ export default async function BeritaDetail({ params }) {
             {post.title}
           </p>
 
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '50px' }}>
+          <div className="berita-detail-flex" style={{ display: 'flex', flexWrap: 'wrap', gap: '50px' }}>
             
             {/* Text Content - Left */}
             <div 
-              className="rich-text-content"
+              className="rich-text-content berita-detail-text"
               style={{ flex: '1', minWidth: '300px', color: '#475569', lineHeight: '1.8', fontSize: '1.05rem' }}
               dangerouslySetInnerHTML={{ __html: post.content ? post.content.replace(/&nbsp;|\u00A0/g, ' ') : '' }}
             />
 
 
-            {/* Image Content - Right */}
-            <div style={{ flex: '0 0 350px' }}>
+            {/* Image Content - Right (menumpuk tengah di HP) */}
+            <div className="berita-detail-photo" style={{ flex: '0 0 350px' }}>
               <div style={{ 
                 border: '8px solid #f1f5f9', 
                 padding: '4px', 

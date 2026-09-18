@@ -541,6 +541,11 @@ body {
   .profil-info-box { min-width: 0; padding: 12px 8px !important; }
   .profil-info-title { font-size: 0.65rem !important; }
   .profil-info-value { font-size: 0.8rem !important; overflow-wrap: break-word; }
+  /* Detail berita: kartu ramping, teks & foto menumpuk penuh di HP */
+  .berita-detail-card { padding: 20px 15px !important; }
+  .berita-detail-flex { flex-direction: column; gap: 24px !important; }
+  .berita-detail-text { min-width: 0 !important; }
+  .berita-detail-photo { flex: 1 1 auto !important; width: 100% !important; max-width: 340px !important; margin: 0 auto; }
 
   /* Judul & halaman detail di HP */
   main h1 { font-size: 1.7rem !important; }
