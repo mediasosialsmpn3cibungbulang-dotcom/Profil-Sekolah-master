@@ -36,10 +36,10 @@ export default async function EkskulDetail({ params }) {
           Ekstrakurikuler
         </h2>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '50px' }}>
+        <div className="ekskul-detail-flex" style={{ display: 'flex', flexWrap: 'wrap', gap: '50px' }}>
           
           {/* Kolom Kiri: Teks */}
-          <div style={{ flex: '2', minWidth: '300px' }}>
+          <div className="ekskul-detail-text" style={{ flex: '2', minWidth: '300px' }}>
             <h3 style={{ 
               fontSize: '1.8rem', 
               color: '#0f3a54', 
@@ -72,8 +72,8 @@ export default async function EkskulDetail({ params }) {
             </div>
           </div>
 
-          {/* Kolom Kanan: Foto */}
-          <div style={{ flex: '1', minWidth: '300px', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
+          {/* Kolom Kanan: Foto (tengah di HP) */}
+          <div className="ekskul-detail-photo" style={{ flex: '1', minWidth: '300px', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
             <div style={{ 
               border: '15px solid #cbd5e1', // Thick grey border resembling the reference
               background: 'white',

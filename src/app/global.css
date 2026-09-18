@@ -546,6 +546,11 @@ body {
   .berita-detail-flex { flex-direction: column; gap: 24px !important; }
   .berita-detail-text { min-width: 0 !important; }
   .berita-detail-photo { flex: 1 1 auto !important; width: 100% !important; max-width: 340px !important; margin: 0 auto; }
+  /* Detail ekskul: menumpuk rapi di HP */
+  .ekskul-detail-flex { flex-direction: column; gap: 24px !important; }
+  .ekskul-detail-text, .ekskul-detail-photo { min-width: 0 !important; }
+  .ekskul-detail-photo { justify-content: center; }
+  .ekskul-detail-text h3 { font-size: 1.3rem !important; }
 
   /* Judul & halaman detail di HP */
   main h1 { font-size: 1.7rem !important; }
