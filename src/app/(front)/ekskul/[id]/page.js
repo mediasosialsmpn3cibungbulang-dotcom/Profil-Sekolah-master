@@ -31,7 +31,7 @@ export default async function EkskulDetail({ params }) {
         </h1>
       </div>
 
-      <div className="container" style={{ padding: '60px 0' }}>
+      <div className="container" style={{ padding: '60px 20px' }}>
         <h2 style={{ fontSize: '2.2rem', color: '#0f3a54', marginBottom: '40px', fontWeight: '600' }}>
           Ekstrakurikuler
         </h2>

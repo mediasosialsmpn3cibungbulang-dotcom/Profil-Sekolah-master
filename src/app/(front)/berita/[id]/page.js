@@ -54,7 +54,7 @@ export default async function BeritaDetail({ params }) {
       </section>
 
       {/* Main Content Container */}
-      <section className="container" style={{ padding: '60px 0 100px 0' }}>
+      <section className="container" style={{ padding: '60px 20px 100px 20px' }}>
         <div className="berita-detail-card" style={{ background: 'white', padding: '50px', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
           
           <h2 style={{ fontSize: '1.2rem', color: '#64748b', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '1px' }}>

@@ -1,7 +1,11 @@
 # Product Requirements Document (PRD)
 **Project Name:** Website Profil Sekolah Resmi (SMPN 3 Cibungbulang)  
-**Version:** 2.33 (Ekskul Detail Mobile)  
+**Version:** 2.34 (Padding Kontainer Detail)  
 **Status:** Complete & Production Tested  
+
+**Changelog v2.34 (Sep 2026):** Halaman detail ekskul & berita: padding
+horizontal kontainer yang tertimpa nol dikembalikan (20px) agar teks
+tidak menempel sisi layar HP.
 
 **Changelog v2.33 (Sep 2026):** Halaman detail ekskul di HP — teks & foto
 menumpuk vertikal penuh (tidak mentok sisi), judul diperkecil.
